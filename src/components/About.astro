@@ -1,0 +1,263 @@
+---
+---
+
+<section id="about">
+  <div class="section">
+    <p class="section-label">01 — SOBRE MÍ</p>
+
+    <div class="about-grid">
+      <!-- Photo column -->
+      <div class="photo-col" data-reveal>
+        <div class="photo-wrapper">
+          <img
+            src="/images/profile.webp"
+            alt="Nicolas Rodriguez Forero"
+            class="profile-img"
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- Fallback initials placeholder -->
+          <div class="photo-placeholder" style="display:none;">
+            <span class="initials gradient-text">NR</span>
+          </div>
+          <div class="photo-border"></div>
+        </div>
+
+        <div class="photo-stats">
+          <div class="stat">
+            <span class="stat-value gradient-text">2022</span>
+            <span class="stat-label">Inicio en programación</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value gradient-text">6+</span>
+            <span class="stat-label">Proyectos en producción</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value gradient-text">B2</span>
+            <span class="stat-label">Inglés</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio column -->
+      <div class="bio-col">
+        <h2 class="about-heading" data-reveal>
+          Desarrollador que<br />
+          <span class="gradient-text">piensa en sistemas.</span>
+        </h2>
+
+        <div class="bio-text">
+          <p data-reveal>
+            Soy Nicolas, desarrollador Full Stack e ingeniero de sistemas de IA cursando
+            Ingeniería en Ciencias de la Computación e Inteligencia Artificial en la
+            Universidad Sergio Arboleda (Bogotá), donde hago parte del Programa de
+            Honores Rodrigo Noguera Laborde. Co-fundé <strong>Tech Craft Solutions</strong>,
+            una empresa de software e IA, donde defino arquitecturas y entrego soluciones
+            end-to-end a clientes reales.
+          </p>
+
+          <p data-reveal>
+            Me especializo en construir productos que integran IA de manera significativa:
+            sistemas RAG en producción, plataformas SaaS multi-tenant, agentes LangGraph,
+            y aplicaciones móviles con Flutter. Disfruto especialmente los proyectos donde
+            el backend, la IA y la experiencia de usuario deben funcionar en perfecta
+            armonía para resolver un problema concreto.
+          </p>
+
+          <p data-reveal>
+            Creo que el criterio técnico no se mide solo en líneas de código, sino en
+            las decisiones de arquitectura que hacen que un sistema sea mantenible,
+            escalable y confiable. Aprendo continuamente, me adapto rápido, y siempre
+            entrego con calidad.
+          </p>
+        </div>
+
+        <blockquote class="highlight-quote" data-reveal>
+          <span class="quote-mark gradient-text">"</span>
+          No solo escribo código — diseño soluciones que duran.
+          <span class="quote-mark gradient-text">"</span>
+        </blockquote>
+
+        <div class="about-badges" data-reveal>
+          <span class="badge">Universidad Sergio Arboleda</span>
+          <span class="badge">Programa de Honores 2025-II · 2026-I</span>
+          <span class="badge">Bogotá, Colombia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #about {
+    border-top: 1px solid #1A2535;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+
+  /* Photo */
+  .photo-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .photo-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    overflow: visible;
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
+    display: block;
+    filter: grayscale(10%) contrast(1.05);
+    border: 1px solid #1A2535;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #0D1520;
+    border: 1px solid #1A2535;
+    border-radius: 8px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .initials {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 5rem;
+  }
+
+  .photo-border {
+    position: absolute;
+    inset: 10px -10px -10px 10px;
+    border: 1px solid #00FF8740;
+    border-radius: 8px;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .photo-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #0D1520;
+    border: 1px solid #1A2535;
+    border-radius: 6px;
+  }
+  .stat-value {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+  }
+  .stat-label {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.8rem;
+    color: #8899AA;
+  }
+
+  /* Bio */
+  .bio-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .about-heading {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    color: #E8EDF2;
+  }
+
+  .bio-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .bio-text p {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.975rem;
+    font-weight: 300;
+    color: #8899AA;
+    line-height: 1.8;
+  }
+  .bio-text strong {
+    color: #E8EDF2;
+    font-weight: 500;
+  }
+
+  .highlight-quote {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 600;
+    color: #E8EDF2;
+    line-height: 1.5;
+    padding: 1.5rem 1.75rem;
+    border-left: 2px solid transparent;
+    background: linear-gradient(#0D1520, #0D1520) padding-box,
+                linear-gradient(135deg, #00FF87, #00CFFF) border-box;
+    border-radius: 4px;
+  }
+  .quote-mark {
+    font-size: 1.5em;
+    line-height: 0;
+    vertical-align: -0.3em;
+  }
+
+  .about-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .badge {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #00FF87;
+    background: #00FF8710;
+    border: 1px solid #00FF8730;
+    border-radius: 100px;
+    padding: 0.3rem 0.9rem;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .photo-wrapper {
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    .photo-stats {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .stat { flex: 1; min-width: 130px; }
+  }
+</style>

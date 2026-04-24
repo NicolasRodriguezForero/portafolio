@@ -1,0 +1,38 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© {year} Nicolas Rodriguez Forero</span>
+    <span class="footer-built">
+      Hecho con
+      <span class="gradient-text">Astro + GSAP</span>
+    </span>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid #1A2535;
+    padding: 1.75rem clamp(1.25rem, 5vw, 6rem);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footer-copy,
+  .footer-built {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: #4A6070;
+  }
+</style>

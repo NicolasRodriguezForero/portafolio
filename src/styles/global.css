@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "./animations.css";
+
+/* ---- Google Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+
+/* ---- Tailwind v4 Theme ---- */
+@theme {
+  --color-bg:        #050A0F;
+  --color-surface:   #0D1520;
+  --color-border:    #1A2535;
+  --color-muted:     #4A6070;
+  --color-text:      #E8EDF2;
+  --color-text-dim:  #8899AA;
+  --color-green:     #00FF87;
+  --color-cyan:      #00CFFF;
+
+  --font-display:    'Syne', system-ui, sans-serif;
+  --font-body:       'Space Grotesk', system-ui, sans-serif;
+}
+
+/* ---- Base ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #050A0F;
+  color: #E8EDF2;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #050A0F;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/noise.svg');
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Selection */
+::selection {
+  background-color: #00FF8730;
+  color: #00FF87;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: #050A0F; }
+::-webkit-scrollbar-thumb  { background: #1A2535; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #2A3545; }
+
+/* ---- Utilities ---- */
+
+.gradient-text {
+  background: linear-gradient(135deg, #00FF87 0%, #00CFFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-animated {
+  background: linear-gradient(135deg, #00FF87 0%, #00CFFF 50%, #00FF87 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Gradient border on hover */
+.gradient-border {
+  position: relative;
+  border: 1px solid #1A2535;
+  border-radius: inherit;
+  transition: border-color 0.3s ease;
+}
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #00FF87, #00CFFF);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.gradient-border:hover { border-color: transparent; }
+.gradient-border:hover::after { opacity: 1; }
+
+.glow-green { box-shadow: 0 0 24px #00FF8740; }
+.glow-cyan  { box-shadow: 0 0 24px #00CFFF40; }
+
+/* Section wrapper */
+.section {
+  padding-top: clamp(5rem, 10vh, 8rem);
+  padding-bottom: clamp(5rem, 10vh, 8rem);
+  padding-inline: clamp(1.25rem, 5vw, 6rem);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* Section label — "01 — ABOUT" etc. */
+.section-label {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4A6070;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, #00FF87, #00CFFF);
+  flex-shrink: 0;
+}
+
+/* Typewriter cursor blink */
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #00FF87;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 0.9s step-end infinite;
+}
+
+/* ---- Reduced Motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

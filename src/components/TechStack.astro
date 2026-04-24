@@ -1,0 +1,133 @@
+---
+import { Icon } from 'astro-icon/components';
+import { techStack } from '../data/techStack';
+---
+
+<section id="stack">
+  <div class="section">
+    <p class="section-label">02 — STACK</p>
+
+    <h2 class="section-heading" data-reveal>
+      Herramientas que<br />
+      <span class="gradient-text">domino.</span>
+    </h2>
+
+    <div class="categories" data-stagger>
+      {techStack.map((category) => (
+        <div class="category" data-stagger-item>
+          <div class="category-header">
+            <Icon name={category.icon} class="category-icon" aria-hidden="true" />
+            <span class="category-name">{category.name}</span>
+          </div>
+          <div class="pills">
+            {category.items.map((item) => (
+              <div class={`tech-pill ${item.level}`} title={item.name}>
+                <Icon name={item.icon} class="tech-icon" aria-hidden="true" />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  #stack {
+    border-top: 1px solid #1A2535;
+  }
+
+  .section-heading {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    color: #E8EDF2;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .category {
+    background: #0D1520;
+    border: 1px solid #1A2535;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: border-color 0.3s ease;
+  }
+  .category:hover {
+    border-color: #2A3545;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+  .category-icon {
+    width: 18px;
+    height: 18px;
+    color: #00FF87;
+    flex-shrink: 0;
+  }
+  .category-name {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4A6070;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    background: #050A0F;
+    border: 1px solid #1A2535;
+    border-radius: 100px;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: #8899AA;
+    transition: border-color 0.25s ease, color 0.25s ease;
+    cursor: default;
+  }
+  .tech-pill:hover {
+    border-color: #00FF87;
+    color: #E8EDF2;
+  }
+  .tech-pill.primary {
+    color: #E8EDF2;
+    border-color: #2A3545;
+  }
+  .tech-pill.primary:hover {
+    border-color: #00FF87;
+    color: #00FF87;
+  }
+  .tech-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .categories {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
