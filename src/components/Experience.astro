@@ -30,7 +30,7 @@ import { experiences } from '../data/experience';
                 <p class="exp-company">{exp.company}</p>
               </div>
               <span class={`exp-type-badge ${exp.type}`}>
-                {exp.type === 'work' ? 'Trabajo' : exp.type === 'academic' ? 'Académico' : 'Educación'}
+                {exp.type === 'work' ? 'Trabajo' : exp.type === 'academic' ? 'Académico' : exp.type === 'education' ? 'Educación' : 'Investigación'}
               </span>
             </div>
 
@@ -145,6 +145,7 @@ import { experiences } from '../data/experience';
   .dot-inner.work     { background: #00FF87; }
   .dot-inner.academic { background: #00CFFF; }
   .dot-inner.education { background: #A0B4C8; }
+  .dot-inner.research { background: #B47AFF; }
 
   /* Cards */
   .timeline-card {
@@ -201,6 +202,7 @@ import { experiences } from '../data/experience';
   .exp-type-badge.work     { background: #00FF8710; border: 1px solid #00FF8730; color: #00FF87; }
   .exp-type-badge.academic { background: #00CFFF10; border: 1px solid #00CFFF30; color: #00CFFF; }
   .exp-type-badge.education{ background: #A0B4C810; border: 1px solid #A0B4C830; color: #A0B4C8; }
+  .exp-type-badge.research { background: #B47AFF10; border: 1px solid #B47AFF30; color: #B47AFF; }
 
   .exp-desc {
     font-family: 'Inter', system-ui, sans-serif;

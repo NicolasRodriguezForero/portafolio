@@ -21,7 +21,7 @@ export interface Experience {
   description: string;
   highlights: string[];
   tags: string[];
-  type: 'work' | 'education' | 'academic';
+  type: 'work' | 'education' | 'academic' | 'research';
 }
 
 export interface TechCategory {
