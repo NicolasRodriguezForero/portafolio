@@ -1,8 +1,8 @@
 const ROLES = [
   'Desarrollador Full Stack',
-  'Ingeniero de Sistemas de IA',
+  'Ing. Computación e Inteligencia Artificial',
   'Co-fundador @ Tech Craft Solutions',
-  'Estudiante de Computación e IA',
+  'Construyo sistemas que piensan',
 ];
 
 export function initTypewriter(elementId: string): void {

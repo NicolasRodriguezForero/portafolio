@@ -10,38 +10,32 @@ export function initCursor(): void {
 
   document.documentElement.style.cursor = 'none';
 
-  const dotX  = gsap.quickTo(dot,  'x', { duration: 0.08, ease: 'none' });
-  const dotY  = gsap.quickTo(dot,  'y', { duration: 0.08, ease: 'none' });
-  const ringX = gsap.quickTo(ring, 'x', { duration: 0.12, ease: 'power2.out' });
-  const ringY = gsap.quickTo(ring, 'y', { duration: 0.12, ease: 'power2.out' });
+  // Centering via GSAP so it composes correctly with scale animations
+  gsap.set([dot, ring], { xPercent: -50, yPercent: -50 });
 
   window.addEventListener('mousemove', (e: MouseEvent) => {
-    dotX(e.clientX);
-    dotY(e.clientY);
-    ringX(e.clientX);
-    ringY(e.clientY);
-  });
+    gsap.set(dot,  { x: e.clientX, y: e.clientY });
+    gsap.set(ring, { x: e.clientX, y: e.clientY });
+  }, { passive: true });
 
-  // Grow on hoverable elements
   document.addEventListener('mouseover', (e: MouseEvent) => {
-    const target = (e.target as Element).closest('a, button, [data-cursor-grow]');
-    if (target) {
-      gsap.to(ring, { scale: 2.2, opacity: 0.6, duration: 0.25, ease: 'power2.out' });
-      gsap.to(dot,  { scale: 0.4, duration: 0.25, ease: 'power2.out' });
+    if ((e.target as Element).closest('a, button, [data-cursor-grow]')) {
+      gsap.to(ring, { scale: 2.2, opacity: 0.6, duration: 0.2, ease: 'power2.out' });
+      gsap.to(dot,  { scale: 0.4, duration: 0.2, ease: 'power2.out' });
     }
   });
+
   document.addEventListener('mouseout', (e: MouseEvent) => {
-    const target = (e.target as Element).closest('a, button, [data-cursor-grow]');
-    if (target) {
-      gsap.to(ring, { scale: 1, opacity: 0.35, duration: 0.25, ease: 'power2.out' });
-      gsap.to(dot,  { scale: 1, duration: 0.25, ease: 'power2.out' });
+    if ((e.target as Element).closest('a, button, [data-cursor-grow]')) {
+      gsap.to(ring, { scale: 1, opacity: 0.35, duration: 0.2, ease: 'power2.out' });
+      gsap.to(dot,  { scale: 1, duration: 0.2, ease: 'power2.out' });
     }
   });
 
   document.addEventListener('mouseleave', () => {
-    gsap.to([dot, ring], { opacity: 0, duration: 0.2 });
+    gsap.to([dot, ring], { opacity: 0, duration: 0.15 });
   });
   document.addEventListener('mouseenter', () => {
-    gsap.to([dot, ring], { opacity: 1, duration: 0.2 });
+    gsap.to([dot, ring], { opacity: 1, duration: 0.15 });
   });
 }

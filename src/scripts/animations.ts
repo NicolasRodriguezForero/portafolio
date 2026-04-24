@@ -70,7 +70,7 @@ export function initTimelineLine(): void {
           trigger: '#experience',
           start: 'top 65%',
           end: 'bottom 35%',
-          scrub: 1.2,
+          scrub: 0.5,
         },
       }
     );
