@@ -11,9 +11,9 @@ import { projects } from '../data/projects';
     </h2>
     <p class="projects-hint" data-reveal>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
+        <path d="M12 5v14M5 12l7 7 7-7"/>
       </svg>
-      Arrastra para explorar
+      Desplázate para explorar
     </p>
   </div>
 
@@ -21,7 +21,7 @@ import { projects } from '../data/projects';
     <div id="projects-track">
       {projects.map((project) => (
         <article
-          class={`project-card gradient-border ${project.accentColor}`}
+          class={`project-card ${project.accentColor}`}
           data-tilt
         >
           <div class={`card-accent ${project.accentColor}`}></div>
@@ -113,21 +113,17 @@ import { projects } from '../data/projects';
     color: #4A6070;
   }
 
-  /* Carousel */
+  /* Horizontal scroll track */
   #projects-wrapper {
     overflow: hidden;
     padding: 1rem clamp(1.25rem, 5vw, 6rem) clamp(4rem, 8vh, 6rem);
-    cursor: grab;
-  }
-  #projects-wrapper:active {
-    cursor: grabbing;
   }
 
   #projects-track {
     display: flex;
     gap: 1.5rem;
     width: max-content;
-    user-select: none;
+    will-change: transform;
   }
 
   /* Cards */
@@ -138,13 +134,16 @@ import { projects } from '../data/projects';
     border-radius: 10px;
     overflow: hidden;
     transform-style: preserve-3d;
-    transition: box-shadow 0.3s ease;
     position: relative;
+    border: 1px solid #1A2535;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .project-card:hover {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   }
+  .project-card.green:hover { border-color: #00FF8750; }
+  .project-card.cyan:hover  { border-color: #00CFFF50; }
 
   .card-accent {
     height: 2px;
@@ -246,7 +245,6 @@ import { projects } from '../data/projects';
   @media (max-width: 768px) {
     #projects-wrapper {
       overflow: visible;
-      cursor: default;
     }
     #projects-track {
       flex-direction: column;

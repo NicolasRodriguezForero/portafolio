@@ -18,21 +18,7 @@ export function initCursor(): void {
     gsap.set(ring, { x: e.clientX, y: e.clientY });
   }, { passive: true });
 
-  document.addEventListener('mouseover', (e: MouseEvent) => {
-    if ((e.target as Element).closest('a, button, [data-cursor-grow]')) {
-      gsap.to(ring, { scale: 2.2, opacity: 0.6, duration: 0.2, ease: 'power2.out' });
-      gsap.to(dot,  { scale: 0.4, duration: 0.2, ease: 'power2.out' });
-    }
-  });
-
-  document.addEventListener('mouseout', (e: MouseEvent) => {
-    if ((e.target as Element).closest('a, button, [data-cursor-grow]')) {
-      gsap.to(ring, { scale: 1, opacity: 0.35, duration: 0.2, ease: 'power2.out' });
-      gsap.to(dot,  { scale: 1, duration: 0.2, ease: 'power2.out' });
-    }
-  });
-
-  document.addEventListener('mouseleave', () => {
+document.addEventListener('mouseleave', () => {
     gsap.to([dot, ring], { opacity: 0, duration: 0.15 });
   });
   document.addEventListener('mouseenter', () => {

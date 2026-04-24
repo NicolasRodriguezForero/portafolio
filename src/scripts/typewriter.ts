@@ -1,6 +1,6 @@
 const ROLES = [
   'Desarrollador Full Stack',
-  'Ing. Computación e Inteligencia Artificial',
+  'Ing. en Ciencias de la Computación e IA',
   'Co-fundador @ Tech Craft Solutions',
   'Construyo sistemas que piensan',
 ];

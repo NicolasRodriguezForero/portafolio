@@ -128,7 +128,7 @@ const languages = [
   /* Skill cards grid */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
     margin-bottom: 3rem;
   }
@@ -138,13 +138,10 @@ const languages = [
     border: 1px solid #1A2535;
     border-radius: 10px;
     padding: 1.5rem;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    transition: border-color 0.3s ease;
   }
-  .skill-card:hover {
-    transform: translateY(-3px);
-  }
-  .skill-card.green:hover { border-color: #00FF8740; }
-  .skill-card.cyan:hover  { border-color: #00CFFF40; }
+  .skill-card.green:hover { border-color: #00FF8760; }
+  .skill-card.cyan:hover  { border-color: #00CFFF60; }
 
   .skill-card-header {
     display: flex;
@@ -209,8 +206,8 @@ const languages = [
   .dot.filled.green { background: #00FF87; }
   .dot.filled.cyan  { background: #00CFFF; }
 
-  .skill-card:hover .dot.filled.green { box-shadow: 0 0 6px #00FF8780; }
-  .skill-card:hover .dot.filled.cyan  { box-shadow: 0 0 6px #00CFFF80; }
+  .skill-card:hover .dot.filled.green { box-shadow: none; }
+  .skill-card:hover .dot.filled.cyan  { box-shadow: none; }
 
   /* Languages */
   .languages-block {

@@ -42,7 +42,7 @@ const education = [
 
     <div class="edu-grid">
       {education.map((item, i) => (
-        <div class={`edu-card gradient-border ${item.color}`} data-reveal>
+        <div class={`edu-card ${item.color}`} data-reveal>
           <div class={`edu-accent ${item.color}`}></div>
 
           <div class="edu-body">
@@ -99,14 +99,13 @@ const education = [
 
   .edu-card {
     background: #0D1520;
+    border: 1px solid #1A2535;
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease;
   }
-  .edu-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
-  }
+  .edu-card.green:hover { border-color: #00FF8760; }
+  .edu-card.cyan:hover  { border-color: #00CFFF60; }
 
   .edu-accent {
     height: 2px;
