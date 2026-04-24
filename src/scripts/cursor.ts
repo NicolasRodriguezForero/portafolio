@@ -12,8 +12,8 @@ export function initCursor(): void {
 
   const dotX  = gsap.quickTo(dot,  'x', { duration: 0.08, ease: 'none' });
   const dotY  = gsap.quickTo(dot,  'y', { duration: 0.08, ease: 'none' });
-  const ringX = gsap.quickTo(ring, 'x', { duration: 0.3, ease: 'power3.out' });
-  const ringY = gsap.quickTo(ring, 'y', { duration: 0.3, ease: 'power3.out' });
+  const ringX = gsap.quickTo(ring, 'x', { duration: 0.12, ease: 'power2.out' });
+  const ringY = gsap.quickTo(ring, 'y', { duration: 0.12, ease: 'power2.out' });
 
   window.addEventListener('mousemove', (e: MouseEvent) => {
     dotX(e.clientX);

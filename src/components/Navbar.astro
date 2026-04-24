@@ -1,17 +1,29 @@
 ---
 const navLinks = [
   { href: '#about',      label: 'Sobre mí' },
+  { href: '#education',  label: 'Educación' },
   { href: '#stack',      label: 'Stack' },
   { href: '#projects',   label: 'Proyectos' },
   { href: '#experience', label: 'Experiencia' },
+  { href: '#skills',     label: 'Habilidades' },
   { href: '#contact',    label: 'Contacto' },
 ];
 ---
 
 <header id="navbar">
   <nav>
+    <!--
+      LOGO: Cuando tengas tu logo listo, colócalo en /public/images/logo.svg (o .png)
+      y se mostrará automáticamente en lugar del texto "NRF".
+    -->
     <a href="/" class="brand" aria-label="Nicolas Rodriguez Forero">
-      <span class="brand-text gradient-text">NRF</span>
+      <img
+        src="/images/logo.svg"
+        alt="Logo Nicolas Rodriguez"
+        class="brand-logo"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      />
+      <span class="brand-text gradient-text" style="display:none;">NRF</span>
     </a>
 
     <ul class="nav-links" role="list">
@@ -63,6 +75,12 @@ const navLinks = [
     margin: 0 auto;
   }
 
+  .brand-logo {
+    height: 36px;
+    width: auto;
+    display: block;
+  }
+
   .brand-text {
     font-family: 'Syne', system-ui, sans-serif;
     font-weight: 800;
@@ -73,13 +91,13 @@ const navLinks = [
 
   .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 2rem;
     list-style: none;
   }
 
   .nav-link {
     font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: 0.875rem;
+    font-size: 0.82rem;
     font-weight: 500;
     color: #8899AA;
     text-decoration: none;
@@ -144,7 +162,7 @@ const navLinks = [
   }
   .mobile-link:hover { color: #00FF87; }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .nav-links { display: none; }
     .menu-btn  { display: flex; }
     .mobile-menu { display: block; }

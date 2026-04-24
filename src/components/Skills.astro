@@ -1,0 +1,286 @@
+---
+const skillCategories = [
+  {
+    name: 'Liderazgo & Gestión',
+    icon: '⚡',
+    color: 'green' as const,
+    skills: [
+      { name: 'Liderazgo técnico',           level: 5 },
+      { name: 'Gestión de proyectos',         level: 4 },
+      { name: 'Emprendimiento',               level: 5 },
+      { name: 'Toma de decisiones técnicas',  level: 4 },
+    ],
+  },
+  {
+    name: 'Comunicación',
+    icon: '💬',
+    color: 'cyan' as const,
+    skills: [
+      { name: 'Comunicación técnica',         level: 5 },
+      { name: 'Trabajo en equipo',            level: 5 },
+      { name: 'Atención al cliente',          level: 4 },
+      { name: 'Documentación de proyectos',   level: 4 },
+    ],
+  },
+  {
+    name: 'Pensamiento',
+    icon: '🧠',
+    color: 'green' as const,
+    skills: [
+      { name: 'Pensamiento analítico',        level: 5 },
+      { name: 'Resolución de problemas',      level: 5 },
+      { name: 'Investigación aplicada',       level: 4 },
+      { name: 'Diseño de arquitecturas',      level: 4 },
+    ],
+  },
+  {
+    name: 'Actitud',
+    icon: '🚀',
+    color: 'cyan' as const,
+    skills: [
+      { name: 'Proactividad',                 level: 5 },
+      { name: 'Aprendizaje continuo',         level: 5 },
+      { name: 'Adaptación a tecnologías',     level: 5 },
+      { name: 'Orientación a la calidad',     level: 5 },
+    ],
+  },
+];
+
+const languages = [
+  { name: 'Español', level: 'Nativo',     pct: 100, color: 'green' as const },
+  { name: 'Inglés',  level: 'B2 Avanzado', pct: 75,  color: 'cyan'  as const },
+  { name: 'Francés', level: 'A1 Básico',  pct: 20,  color: 'green' as const },
+];
+---
+
+<section id="skills">
+  <div class="section">
+    <p class="section-label">06 — HABILIDADES</p>
+
+    <h2 class="section-heading" data-reveal>
+      Más allá del<br />
+      <span class="gradient-text">código.</span>
+    </h2>
+
+    <div class="skills-grid" data-stagger>
+      {skillCategories.map((cat) => (
+        <div class={`skill-card ${cat.color}`} data-stagger-item>
+          <div class="skill-card-header">
+            <span class="skill-cat-icon" aria-hidden="true">{cat.icon}</span>
+            <span class="skill-cat-name">{cat.name}</span>
+          </div>
+          <ul class="skill-list">
+            {cat.skills.map((skill) => (
+              <li class="skill-item">
+                <div class="skill-row">
+                  <span class="skill-name">{skill.name}</span>
+                  <div class="skill-dots" aria-label={`Nivel ${skill.level} de 5`}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span class={`dot ${i < skill.level ? `filled ${cat.color}` : 'empty'}`}></span>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Languages -->
+    <div class="languages-block" data-reveal>
+      <h3 class="languages-title">Idiomas</h3>
+      <div class="languages-list">
+        {languages.map((lang) => (
+          <div class="lang-item">
+            <div class="lang-header">
+              <span class="lang-name">{lang.name}</span>
+              <span class={`lang-level ${lang.color}`}>{lang.level}</span>
+            </div>
+            <div class="lang-bar-track">
+              <div
+                class={`lang-bar-fill ${lang.color}`}
+                style={`width: ${lang.pct}%`}
+              ></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #skills {
+    border-top: 1px solid #1A2535;
+  }
+
+  .section-heading {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    color: #E8EDF2;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Skill cards grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
+
+  .skill-card {
+    background: #0D1520;
+    border: 1px solid #1A2535;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .skill-card:hover {
+    transform: translateY(-3px);
+  }
+  .skill-card.green:hover { border-color: #00FF8740; }
+  .skill-card.cyan:hover  { border-color: #00CFFF40; }
+
+  .skill-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #1A2535;
+  }
+
+  .skill-cat-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .skill-cat-name {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #A0B4C8;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .skill-name {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #8899AA;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .skill-dots {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: box-shadow 0.2s ease;
+  }
+  .dot.empty        { background: #1A2535; }
+  .dot.filled.green { background: #00FF87; }
+  .dot.filled.cyan  { background: #00CFFF; }
+
+  .skill-card:hover .dot.filled.green { box-shadow: 0 0 6px #00FF8780; }
+  .skill-card:hover .dot.filled.cyan  { box-shadow: 0 0 6px #00CFFF80; }
+
+  /* Languages */
+  .languages-block {
+    background: #0D1520;
+    border: 1px solid #1A2535;
+    border-radius: 10px;
+    padding: 1.75rem;
+  }
+
+  .languages-title {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4A6070;
+    margin-bottom: 1.5rem;
+  }
+
+  .languages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .lang-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .lang-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .lang-name {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #E8EDF2;
+  }
+
+  .lang-level {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .lang-level.green { color: #00FF87; }
+  .lang-level.cyan  { color: #00CFFF; }
+
+  .lang-bar-track {
+    height: 3px;
+    background: #1A2535;
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .lang-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1s ease;
+  }
+  .lang-bar-fill.green { background: linear-gradient(90deg, #00FF87, #00CFFF80); }
+  .lang-bar-fill.cyan  { background: linear-gradient(90deg, #00CFFF, #00FF8780); }
+
+  @media (max-width: 640px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
