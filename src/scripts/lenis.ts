@@ -37,3 +37,25 @@ export function initLenis(): Lenis | null {
 export function getLenis(): Lenis | null {
   return lenisInstance;
 }
+
+export function initSmoothAnchorLinks(): void {
+  document.addEventListener('click', (e: MouseEvent) => {
+    const anchor = (e.target as HTMLElement).closest('a[href^="#"]') as HTMLAnchorElement | null;
+    if (!anchor) return;
+
+    const hash = anchor.getAttribute('href');
+    if (!hash || hash === '#') return;
+
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    e.preventDefault();
+
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(target as HTMLElement, { offset: -68, duration: 2.8 });
+    } else {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+}

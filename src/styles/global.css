@@ -32,6 +32,11 @@ html {
   font-family: 'Inter', system-ui, sans-serif;
   scroll-behavior: auto;
   line-height: 1.6;
+  cursor: url('/cursors/arrow.svg') 2 1, auto;
+}
+
+a, button, [role="button"], label, select, input[type="submit"], input[type="button"] {
+  cursor: url('/cursors/arrow.svg') 2 1, auto;
 }
 
 body {

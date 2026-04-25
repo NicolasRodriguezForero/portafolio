@@ -16,7 +16,7 @@ export function initHeroEntrance(): void {
     .from('.hero-name',        { y: 60, opacity: 0, duration: 1.0 }, 0.35)
     .from('.hero-typewriter',  { y: 20, opacity: 0, duration: 0.6 }, 0.75)
     .from('.hero-desc',        { y: 20, opacity: 0, duration: 0.6 }, 0.9)
-    .from('.hero-cta > *',     { y: 24, opacity: 0, duration: 0.5, stagger: 0.12 }, 1.1)
+    .fromTo('.hero-cta > *',   { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.12, clearProps: 'opacity,y' }, 1.1)
     .from('.scroll-indicator', { opacity: 0, duration: 0.6 }, 1.6);
 }
 

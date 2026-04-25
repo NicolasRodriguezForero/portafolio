@@ -59,7 +59,7 @@ const canonicalURL = Astro.site ?? new URL('https://nicolasrodriguez.dev');
 </style>
 
 <script>
-  import { initLenis } from '../scripts/lenis';
+  import { initLenis, initSmoothAnchorLinks } from '../scripts/lenis';
   import { initCursor } from '../scripts/cursor';
   import { initTypewriter } from '../scripts/typewriter';
   import {
@@ -72,6 +72,7 @@ const canonicalURL = Astro.site ?? new URL('https://nicolasrodriguez.dev');
 
   // Lenis must be first — ScrollTrigger integration depends on it
   initLenis();
+  initSmoothAnchorLinks();
   initHeroEntrance();
   initTypewriter('typewriter-text');
   initCursor();

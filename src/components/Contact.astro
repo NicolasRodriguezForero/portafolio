@@ -8,14 +8,26 @@
     <div class="contact-inner">
       <div class="contact-heading-col" data-reveal>
         <h2 class="contact-heading">
-          ¿Tienes un proyecto<br />
-          en mente?<br />
-          <span class="gradient-text">Hablemos.</span>
+          ¿Quieres<br />
+          trabajar<br />
+          <span class="gradient-text">conmigo?</span>
         </h2>
         <p class="contact-sub">
           Estoy disponible para proyectos freelance, posiciones full-time y colaboraciones interesantes.
           Respondo en menos de 24 horas.
         </p>
+        <div class="contact-cta">
+          <a
+            href="mailto:niquimiqui@gmail.com?subject=Portfolio%20-%20Quiero%20hablar%20contigo"
+            class="btn-primary-large"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            Escríbeme ahora por correo
+          </a>
+        </div>
       </div>
 
       <div class="contact-cards" data-reveal>
@@ -91,18 +103,6 @@
         </a>
       </div>
 
-      <div class="contact-cta" data-reveal>
-        <a
-          href="mailto:niquimiqui@gmail.com?subject=Portfolio%20-%20Quiero%20hablar%20contigo"
-          class="btn-primary-large"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-          </svg>
-          Enviar mensaje
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -113,10 +113,10 @@
   }
 
   .contact-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    max-width: 700px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
   }
 
   .contact-heading {
@@ -124,6 +124,7 @@
     font-weight: 800;
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.15;
+    letter-spacing: -0.03em;
     color: #E8EDF2;
     margin-bottom: 1rem;
   }
@@ -225,7 +226,7 @@
 
   /* CTA */
   .contact-cta {
-    padding-top: 0.5rem;
+    margin-top: 2rem;
   }
 
   .btn-primary-large {
@@ -247,6 +248,13 @@
     opacity: 0.9;
     transform: translateY(-3px);
     box-shadow: 0 12px 40px #00FF8740;
+  }
+
+  @media (max-width: 768px) {
+    .contact-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
   }
 </style>
 

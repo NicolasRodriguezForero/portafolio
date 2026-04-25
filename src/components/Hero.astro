@@ -127,7 +127,7 @@
     font-weight: 800;
     font-size: clamp(2.8rem, 7vw, 6.5rem);
     line-height: 1.1;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.04em;
     margin-bottom: 1.25rem;
   }
 
@@ -157,6 +157,9 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    isolation: isolate;
+    position: relative;
+    z-index: 1;
   }
 
   .btn-primary {
@@ -165,17 +168,22 @@
     gap: 0.5rem;
     padding: 0.75rem 1.75rem;
     background: linear-gradient(135deg, #00FF87, #00CFFF);
+    background-clip: padding-box;
+    -webkit-background-clip: padding-box;
     color: #050A0F;
+    -webkit-text-fill-color: #050A0F;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
     border-radius: 4px;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: filter 0.2s ease, transform 0.2s ease;
     letter-spacing: 0.02em;
+    position: relative;
+    z-index: 1;
   }
   .btn-primary:hover {
-    opacity: 0.9;
+    filter: brightness(0.9);
     transform: translateY(-2px);
   }
 
