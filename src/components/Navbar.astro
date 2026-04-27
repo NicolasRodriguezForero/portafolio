@@ -47,23 +47,23 @@ const navLinks = [
       </button>
     </div>
   </nav>
-
-  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-    <ul role="list">
-      {navLinks.map((link) => (
-        <li>
-          <a href={link.href} class="mobile-link" data-i18n={link.key}>{link.label}</a>
-        </li>
-      ))}
-    </ul>
-    <!-- Language toggle in mobile menu -->
-    <div class="mobile-lang">
-      <button class="lang-toggle mobile-lang-btn" data-i18n-aria="nav.lang.aria" aria-label="Cambiar idioma">
-        <span class="lang-label">EN</span>
-      </button>
-    </div>
-  </div>
 </header>
+
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+  <ul role="list">
+    {navLinks.map((link) => (
+      <li>
+        <a href={link.href} class="mobile-link" data-i18n={link.key}>{link.label}</a>
+      </li>
+    ))}
+  </ul>
+  <!-- Language toggle in mobile menu -->
+  <div class="mobile-lang">
+    <button class="lang-toggle mobile-lang-btn" data-i18n-aria="nav.lang.aria" aria-label="Cambiar idioma">
+      <span class="lang-label">EN</span>
+    </button>
+  </div>
+</div>
 
 <style>
   #navbar {
@@ -186,8 +186,10 @@ const navLinks = [
     display: none;
     position: fixed;
     inset: 68px 0 0;
+    z-index: 99;
     background: rgba(5, 10, 15, 0.97);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 3rem clamp(1.25rem, 5vw, 6rem) 2rem;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
