@@ -1,6 +1,16 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { techStack } from '../data/techStack';
+
+// Grid area + accent color per category index
+const cellMeta = [
+  { area: 'lenguajes', accent: 'cyan',  featured: true  }, // 0 — Lenguajes
+  { area: 'frontend',  accent: 'green', featured: false }, // 1 — Frontend
+  { area: 'backend',   accent: 'cyan',  featured: false }, // 2 — Backend
+  { area: 'ia',        accent: 'green', featured: true  }, // 3 — IA / Datos
+  { area: 'databases', accent: 'cyan',  featured: false }, // 4 — Bases de Datos
+  { area: 'cloud',     accent: 'green', featured: false }, // 5 — Cloud / DevOps
+];
 ---
 
 <section id="stack">
@@ -12,23 +22,29 @@ import { techStack } from '../data/techStack';
       <span class="gradient-text">domino.</span>
     </h2>
 
-    <div class="categories" data-stagger>
-      {techStack.map((category) => (
-        <div class="category" data-stagger-item>
-          <div class="category-header">
-            <Icon name={category.icon} class="category-icon" aria-hidden="true" />
-            <span class="category-name">{category.name}</span>
+    <div class="bento-grid" data-stagger>
+      {techStack.map((category, i) => {
+        const { accent, featured } = cellMeta[i];
+        return (
+          <div
+            class={`bento-cell bento-cell-${i} ${accent}${featured ? ' featured' : ''}`}
+            data-stagger-item
+          >
+            <div class="cell-header">
+              <Icon name={category.icon} class={`cell-icon ${accent}`} aria-hidden="true" />
+              <span class="cell-name">{category.name}</span>
+            </div>
+            <div class="pills">
+              {category.items.map((item) => (
+                <div class={`tech-pill ${item.level}`} title={item.name}>
+                  <Icon name={item.icon} class:list={['tech-icon', { invert: item.invert }]} aria-hidden="true" />
+                  <span>{item.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div class="pills">
-            {category.items.map((item) => (
-              <div class={`tech-pill ${item.level}`} title={item.name}>
-                <Icon name={item.icon} class:list={['tech-icon', { invert: item.invert }]} aria-hidden="true" />
-                <span>{item.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>
@@ -48,44 +64,87 @@ import { techStack } from '../data/techStack';
     margin-bottom: 3rem;
   }
 
-  .categories {
+  /* ── Bento grid ───────────────────────────────────────────
+     Desktop (≥ 900px):
+       row 1 │ lenguajes (×2) │ frontend │ cloud     │
+       row 2 │ backend        │ ia (×2)  │ databases │
+  ──────────────────────────────────────────────────────── */
+  .bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "lenguajes lenguajes frontend  cloud"
+      "backend   ia        ia        databases";
+    gap: 1rem;
   }
 
-  .category {
+  .bento-cell-0 { grid-area: lenguajes; }
+  .bento-cell-1 { grid-area: frontend;  }
+  .bento-cell-2 { grid-area: backend;   }
+  .bento-cell-3 { grid-area: ia;        }
+  .bento-cell-4 { grid-area: databases; }
+  .bento-cell-5 { grid-area: cloud;     }
+
+  /* ── Cell base ─────────────────────────────────────────── */
+  .bento-cell {
+    position: relative;
     background: #0D1520;
     border: 1px solid #1A2535;
-    border-radius: 8px;
+    border-radius: 14px;
     padding: 1.5rem;
-    transition: border-color 0.3s ease;
-  }
-  .category:hover {
-    border-color: #2A3545;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .category-header {
+  /* Top accent bar */
+  .bento-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 14px 14px 0 0;
+  }
+  .bento-cell.cyan::before  { background: linear-gradient(90deg, #00CFFF, transparent); }
+  .bento-cell.green::before { background: linear-gradient(90deg, #00FF87, transparent); }
+
+  /* Featured cells: ambient radial glow */
+  .bento-cell.featured.cyan  { background: radial-gradient(ellipse at 85% 15%, #00CFFF0A 0%, #0D1520 55%); }
+  .bento-cell.featured.green { background: radial-gradient(ellipse at 15% 85%, #00FF870A 0%, #0D1520 55%); }
+
+  /* Hover */
+  .bento-cell.cyan:hover  { border-color: #00CFFF40; box-shadow: 0 4px 32px #00CFFF08; }
+  .bento-cell.green:hover { border-color: #00FF8740; box-shadow: 0 4px 32px #00FF8708; }
+  .bento-cell.featured.cyan:hover  { border-color: #00CFFF60; box-shadow: 0 4px 40px #00CFFF14; }
+  .bento-cell.featured.green:hover { border-color: #00FF8760; box-shadow: 0 4px 40px #00FF8714; }
+
+  /* ── Cell header ───────────────────────────────────────── */
+  .cell-header {
     display: flex;
     align-items: center;
     gap: 0.6rem;
     margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #1A2535;
   }
-  .category-icon {
-    width: 18px;
-    height: 18px;
-    color: #00FF87;
+
+  .cell-icon {
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
   }
-  .category-name {
+  .cell-icon.cyan  { color: #00CFFF; }
+  .cell-icon.green { color: #00FF87; }
+
+  .cell-name {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #4A6070;
   }
 
+  /* ── Pills ─────────────────────────────────────────────── */
   .pills {
     display: flex;
     flex-wrap: wrap;
@@ -107,30 +166,42 @@ import { techStack } from '../data/techStack';
     transition: border-color 0.25s ease, color 0.25s ease;
     cursor: default;
   }
-  .tech-pill:hover {
-    border-color: #00FF87;
-    color: #E8EDF2;
-  }
   .tech-pill.primary {
-    color: #E8EDF2;
+    color: #C8DDE8;
     border-color: #2A3545;
   }
-  .tech-pill.primary:hover {
-    border-color: #00FF87;
-    color: #00FF87;
-  }
-  .tech-icon {
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-  }
-  .tech-icon.invert {
-    filter: invert(1) brightness(2);
+
+  /* All pills in a cell react on card hover */
+  .bento-cell.cyan:hover  .tech-pill { border-color: #00CFFF20; }
+  .bento-cell.green:hover .tech-pill { border-color: #00FF8720; }
+  .bento-cell.cyan:hover  .tech-pill.primary { border-color: #00CFFF50; color: #E8EDF2; }
+  .bento-cell.green:hover .tech-pill.primary { border-color: #00FF8750; color: #E8EDF2; }
+
+  .tech-icon { width: 14px; height: 14px; flex-shrink: 0; }
+  .tech-icon.invert { filter: invert(1) brightness(2); }
+
+  /* ── Responsive ────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "lenguajes lenguajes"
+        "frontend  cloud"
+        "ia        ia"
+        "backend   databases";
+    }
   }
 
-  @media (max-width: 640px) {
-    .categories {
+  @media (max-width: 560px) {
+    .bento-grid {
       grid-template-columns: 1fr;
+      grid-template-areas:
+        "lenguajes"
+        "frontend"
+        "backend"
+        "ia"
+        "databases"
+        "cloud";
     }
   }
 </style>
