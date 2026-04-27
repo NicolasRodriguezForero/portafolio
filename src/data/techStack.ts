@@ -33,9 +33,9 @@ export const techStack: TechCategory[] = [
       { name: 'FastAPI',  icon: 'devicon:fastapi',      level: 'primary' },
       { name: 'Node.js',  icon: 'devicon:nodejs',       level: 'primary' },
       { name: 'Django',   icon: 'devicon:djangorest',   level: 'secondary' },
-      { name: 'Flask',    icon: 'devicon:flask',        level: 'secondary' },
+      { name: 'Flask',    icon: 'devicon:flask',        level: 'secondary', invert: true },
       { name: '.NET',     icon: 'devicon:dotnetcore',   level: 'secondary' },
-      { name: 'Express',  icon: 'devicon:express',      level: 'secondary' },
+      { name: 'Express',  icon: 'devicon:express',      level: 'secondary', invert: true },
     ],
   },
   {

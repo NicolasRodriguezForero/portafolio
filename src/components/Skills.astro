@@ -1,26 +1,28 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 const skillCategories = [
   {
     name: 'Liderazgo & Gestión',
-    icon: '⚡',
+    icon: 'lucide:zap',
     color: 'green' as const,
     skills: ['Liderazgo técnico', 'Gestión de proyectos', 'Emprendimiento', 'Toma de decisiones técnicas'],
   },
   {
     name: 'Comunicación',
-    icon: '💬',
+    icon: 'lucide:message-circle',
     color: 'cyan' as const,
     skills: ['Comunicación técnica', 'Trabajo en equipo', 'Atención al cliente', 'Documentación de proyectos'],
   },
   {
     name: 'Pensamiento',
-    icon: '🧠',
+    icon: 'lucide:brain',
     color: 'green' as const,
     skills: ['Pensamiento analítico', 'Resolución de problemas', 'Investigación aplicada', 'Diseño de arquitecturas'],
   },
   {
     name: 'Actitud',
-    icon: '🚀',
+    icon: 'lucide:rocket',
     color: 'cyan' as const,
     skills: ['Proactividad', 'Aprendizaje continuo', 'Adaptación a tecnologías', 'Orientación a la calidad'],
   },
@@ -46,7 +48,7 @@ const languages = [
       {skillCategories.map((cat) => (
         <div class={`skill-card ${cat.color}`} data-stagger-item>
           <div class="skill-card-header">
-            <span class="skill-cat-icon" aria-hidden="true">{cat.icon}</span>
+            <Icon name={cat.icon} class={`skill-cat-icon ${cat.color}`} aria-hidden="true" />
             <span class="skill-cat-name">{cat.name}</span>
           </div>
           <div class="skill-tags">
@@ -132,9 +134,12 @@ const languages = [
   }
 
   .skill-cat-icon {
-    font-size: 1.2rem;
-    line-height: 1;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
   }
+  .skill-cat-icon.green { color: #00FF87; }
+  .skill-cat-icon.cyan  { color: #00CFFF; }
 
   .skill-cat-name {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;

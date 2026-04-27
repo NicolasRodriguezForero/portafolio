@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 const education = [
   {
     institution: 'Universidad Sergio Arboleda',
@@ -12,7 +14,7 @@ const education = [
       'Proyectos académicos con integración de aprendizaje de máquina y desarrollo de software',
     ],
     color: 'green' as const,
-    icon: '🎓',
+    icon: 'lucide:graduation-cap',
   },
   {
     institution: 'Escuela de Negocios PRIME · Universidad Sergio Arboleda',
@@ -26,7 +28,7 @@ const education = [
       'Fundamentos de Big Data y arquitecturas de datos a escala',
     ],
     color: 'cyan' as const,
-    icon: '📊',
+    icon: 'lucide:bar-chart-2',
   },
 ];
 ---
@@ -51,7 +53,7 @@ const education = [
               <span class="edu-period">{item.period}</span>
             </div>
 
-            <div class="edu-icon" aria-hidden="true">{item.icon}</div>
+            <Icon name={item.icon} class={`edu-icon ${item.color}`} aria-hidden="true" />
 
             <h3 class="edu-degree">{item.degree}</h3>
             <p class="edu-institution">
@@ -150,9 +152,12 @@ const education = [
   }
 
   .edu-icon {
-    font-size: 2rem;
-    line-height: 1;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
   }
+  .edu-icon.green { color: #00FF87; }
+  .edu-icon.cyan  { color: #00CFFF; }
 
   .edu-degree {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;

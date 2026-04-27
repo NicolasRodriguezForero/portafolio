@@ -34,4 +34,5 @@ export interface TechItem {
   name: string;
   icon: string;
   level: 'primary' | 'secondary';
+  invert?: boolean;
 }

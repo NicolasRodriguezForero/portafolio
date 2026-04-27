@@ -22,7 +22,7 @@ import { techStack } from '../data/techStack';
           <div class="pills">
             {category.items.map((item) => (
               <div class={`tech-pill ${item.level}`} title={item.name}>
-                <Icon name={item.icon} class="tech-icon" aria-hidden="true" />
+                <Icon name={item.icon} class:list={['tech-icon', { invert: item.invert }]} aria-hidden="true" />
                 <span>{item.name}</span>
               </div>
             ))}
@@ -123,6 +123,9 @@ import { techStack } from '../data/techStack';
     width: 14px;
     height: 14px;
     flex-shrink: 0;
+  }
+  .tech-icon.invert {
+    filter: invert(1) brightness(2);
   }
 
   @media (max-width: 640px) {
