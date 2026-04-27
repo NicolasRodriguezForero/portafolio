@@ -4,52 +4,32 @@ const skillCategories = [
     name: 'Liderazgo & Gestión',
     icon: '⚡',
     color: 'green' as const,
-    skills: [
-      { name: 'Liderazgo técnico',           level: 5 },
-      { name: 'Gestión de proyectos',         level: 4 },
-      { name: 'Emprendimiento',               level: 5 },
-      { name: 'Toma de decisiones técnicas',  level: 4 },
-    ],
+    skills: ['Liderazgo técnico', 'Gestión de proyectos', 'Emprendimiento', 'Toma de decisiones técnicas'],
   },
   {
     name: 'Comunicación',
     icon: '💬',
     color: 'cyan' as const,
-    skills: [
-      { name: 'Comunicación técnica',         level: 5 },
-      { name: 'Trabajo en equipo',            level: 5 },
-      { name: 'Atención al cliente',          level: 4 },
-      { name: 'Documentación de proyectos',   level: 4 },
-    ],
+    skills: ['Comunicación técnica', 'Trabajo en equipo', 'Atención al cliente', 'Documentación de proyectos'],
   },
   {
     name: 'Pensamiento',
     icon: '🧠',
     color: 'green' as const,
-    skills: [
-      { name: 'Pensamiento analítico',        level: 5 },
-      { name: 'Resolución de problemas',      level: 5 },
-      { name: 'Investigación aplicada',       level: 4 },
-      { name: 'Diseño de arquitecturas',      level: 4 },
-    ],
+    skills: ['Pensamiento analítico', 'Resolución de problemas', 'Investigación aplicada', 'Diseño de arquitecturas'],
   },
   {
     name: 'Actitud',
     icon: '🚀',
     color: 'cyan' as const,
-    skills: [
-      { name: 'Proactividad',                 level: 5 },
-      { name: 'Aprendizaje continuo',         level: 5 },
-      { name: 'Adaptación a tecnologías',     level: 5 },
-      { name: 'Orientación a la calidad',     level: 5 },
-    ],
+    skills: ['Proactividad', 'Aprendizaje continuo', 'Adaptación a tecnologías', 'Orientación a la calidad'],
   },
 ];
 
 const languages = [
-  { name: 'Español', level: 'Nativo',     pct: 100, color: 'green' as const },
-  { name: 'Inglés',  level: 'B2 Avanzado', pct: 75,  color: 'cyan'  as const },
-  { name: 'Francés', level: 'A1 Básico',  pct: 20,  color: 'green' as const },
+  { name: 'Español', level: 'Nativo',       code: 'ES', color: 'green' as const },
+  { name: 'Inglés',  level: 'B2 — Avanzado', code: 'EN', color: 'cyan'  as const },
+  { name: 'Francés', level: 'A1 — Básico',   code: 'FR', color: 'green' as const },
 ];
 ---
 
@@ -69,20 +49,11 @@ const languages = [
             <span class="skill-cat-icon" aria-hidden="true">{cat.icon}</span>
             <span class="skill-cat-name">{cat.name}</span>
           </div>
-          <ul class="skill-list">
+          <div class="skill-tags">
             {cat.skills.map((skill) => (
-              <li class="skill-item">
-                <div class="skill-row">
-                  <span class="skill-name">{skill.name}</span>
-                  <div class="skill-dots" aria-label={`Nivel ${skill.level} de 5`}>
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <span class={`dot ${i < skill.level ? `filled ${cat.color}` : 'empty'}`}></span>
-                    ))}
-                  </div>
-                </div>
-              </li>
+              <span class={`skill-tag ${cat.color}`}>{skill}</span>
             ))}
-          </ul>
+          </div>
         </div>
       ))}
     </div>
@@ -90,18 +61,13 @@ const languages = [
     <!-- Languages -->
     <div class="languages-block" data-reveal>
       <h3 class="languages-title">Idiomas</h3>
-      <div class="languages-list">
+      <div class="lang-cards">
         {languages.map((lang) => (
-          <div class="lang-item">
-            <div class="lang-header">
+          <div class={`lang-card ${lang.color}`}>
+            <span class="lang-code" aria-hidden="true">{lang.code}</span>
+            <div class="lang-info">
               <span class="lang-name">{lang.name}</span>
-              <span class={`lang-level ${lang.color}`}>{lang.level}</span>
-            </div>
-            <div class="lang-bar-track">
-              <div
-                class={`lang-bar-fill ${lang.color}`}
-                style={`width: ${lang.pct}%`}
-              ></div>
+              <span class={`lang-badge ${lang.color}`}>{lang.level}</span>
             </div>
           </div>
         ))}
@@ -126,7 +92,7 @@ const languages = [
     margin-bottom: 3rem;
   }
 
-  /* Skill cards grid */
+  /* ── Skill cards grid ─────────────────────────────────── */
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -135,14 +101,26 @@ const languages = [
   }
 
   .skill-card {
+    position: relative;
     background: #0D1520;
     border: 1px solid #1A2535;
     border-radius: 10px;
     padding: 1.5rem;
+    overflow: hidden;
     transition: border-color 0.3s ease;
   }
   .skill-card.green:hover { border-color: #00FF8760; }
   .skill-card.cyan:hover  { border-color: #00CFFF60; }
+
+  /* Top accent bar — same pattern as project cards */
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .skill-card.green::before { background: linear-gradient(90deg, #00FF87, transparent); }
+  .skill-card.cyan::before  { background: linear-gradient(90deg, #00CFFF, transparent); }
 
   .skill-card-header {
     display: flex;
@@ -167,50 +145,38 @@ const languages = [
     color: #A0B4C8;
   }
 
-  .skill-list {
-    list-style: none;
+  /* Skill tags — wrap pills, no level indicator */
+  .skill-tags {
     display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  .skill-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-
-  .skill-name {
+  .skill-tag {
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.82rem;
-    font-weight: 400;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.32rem 0.85rem;
+    border-radius: 100px;
+    background: #050A0F;
+    border: 1px solid #1A2535;
     color: #8899AA;
-    flex: 1;
-    min-width: 0;
+    transition: border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
   }
 
-  .skill-dots {
-    display: flex;
-    gap: 4px;
-    flex-shrink: 0;
+  /* All tags in a card light up together on card hover */
+  .skill-card.green:hover .skill-tag {
+    border-color: #00FF8745;
+    color: #C8DDE8;
+    box-shadow: 0 0 10px #00FF8710;
+  }
+  .skill-card.cyan:hover .skill-tag {
+    border-color: #00CFFF45;
+    color: #C8DDE8;
+    box-shadow: 0 0 10px #00CFFF10;
   }
 
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    transition: box-shadow 0.2s ease;
-  }
-  .dot.empty        { background: #1A2535; }
-  .dot.filled.green { background: #00FF87; }
-  .dot.filled.cyan  { background: #00CFFF; }
-
-  .skill-card:hover .dot.filled.green { box-shadow: none; }
-  .skill-card:hover .dot.filled.cyan  { box-shadow: none; }
-
-  /* Languages */
+  /* ── Language cards ───────────────────────────────────── */
   .languages-block {
     background: #0D1520;
     border: 1px solid #1A2535;
@@ -225,60 +191,85 @@ const languages = [
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #4A6070;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
-  .languages-list {
+  .lang-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .lang-card {
+    position: relative;
+    background: #050A0F;
+    border: 1px solid #1A2535;
+    border-radius: 8px;
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    min-height: 100px;
+    transition: border-color 0.3s ease;
+  }
+  .lang-card.green:hover { border-color: #00FF8760; }
+  .lang-card.cyan:hover  { border-color: #00CFFF60; }
+
+  /* Left accent bar */
+  .lang-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    border-radius: 8px 0 0 8px;
+  }
+  .lang-card.green::before { background: linear-gradient(to bottom, #00FF87, transparent); }
+  .lang-card.cyan::before  { background: linear-gradient(to bottom, #00CFFF, transparent); }
+
+  /* Big decorative language code in the background */
+  .lang-code {
+    position: absolute;
+    top: -0.35rem;
+    right: 0.6rem;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 4.5rem;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #E8EDF20D;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .lang-info {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .lang-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .lang-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    gap: 0.3rem;
   }
 
   .lang-name {
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
     color: #E8EDF2;
+    line-height: 1;
   }
 
-  .lang-level {
+  .lang-badge {
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
-  .lang-level.green { color: #00FF87; }
-  .lang-level.cyan  { color: #00CFFF; }
+  .lang-badge.green { color: #00FF87; }
+  .lang-badge.cyan  { color: #00CFFF; }
 
-  .lang-bar-track {
-    height: 3px;
-    background: #1A2535;
-    border-radius: 100px;
-    overflow: hidden;
-  }
-
-  .lang-bar-fill {
-    height: 100%;
-    border-radius: 100px;
-    transition: width 1s ease;
-  }
-  .lang-bar-fill.green { background: linear-gradient(90deg, #00FF87, #00CFFF80); }
-  .lang-bar-fill.cyan  { background: linear-gradient(90deg, #00CFFF, #00FF8780); }
-
+  /* ── Responsive ───────────────────────────────────────── */
   @media (max-width: 640px) {
-    .skills-grid { grid-template-columns: 1fr; }
+    .skills-grid    { grid-template-columns: 1fr; }
+    .lang-cards     { grid-template-columns: 1fr; }
   }
 </style>
