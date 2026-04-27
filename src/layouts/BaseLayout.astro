@@ -59,6 +59,7 @@ const canonicalURL = Astro.site ?? new URL('https://nicolasrodriguez.dev');
 </style>
 
 <script>
+  import { initI18n } from '../scripts/i18n';
   import { initLenis, initSmoothAnchorLinks } from '../scripts/lenis';
   import { initCursor } from '../scripts/cursor';
   import { initTypewriter } from '../scripts/typewriter';
@@ -70,10 +71,13 @@ const canonicalURL = Astro.site ?? new URL('https://nicolasrodriguez.dev');
   } from '../scripts/animations';
   import { initProjectsCarousel } from '../scripts/carousel';
 
-  // Lenis must be first — ScrollTrigger integration depends on it
+  // i18n first: patches DOM to correct language and sets __typewriterRoles
+  initI18n();
+  // Lenis must be before GSAP — ScrollTrigger integration depends on it
   initLenis();
   initSmoothAnchorLinks();
   initHeroEntrance();
+  // Typewriter reads __typewriterRoles set by initI18n
   initTypewriter('typewriter-text');
   initCursor();
   initScrollReveals();

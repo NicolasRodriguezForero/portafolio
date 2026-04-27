@@ -2,22 +2,21 @@
 import { Icon } from 'astro-icon/components';
 import { techStack } from '../data/techStack';
 
-// Grid area + accent color per category index
 const cellMeta = [
-  { area: 'lenguajes', accent: 'cyan',  featured: true  }, // 0 — Lenguajes
-  { area: 'frontend',  accent: 'green', featured: false }, // 1 — Frontend
-  { area: 'backend',   accent: 'cyan',  featured: false }, // 2 — Backend
-  { area: 'ia',        accent: 'green', featured: true  }, // 3 — IA / Datos
-  { area: 'databases', accent: 'cyan',  featured: false }, // 4 — Bases de Datos
-  { area: 'cloud',     accent: 'green', featured: false }, // 5 — Cloud / DevOps
+  { area: 'lenguajes', accent: 'cyan',  featured: true  },
+  { area: 'frontend',  accent: 'green', featured: false },
+  { area: 'backend',   accent: 'cyan',  featured: false },
+  { area: 'ia',        accent: 'green', featured: true  },
+  { area: 'databases', accent: 'cyan',  featured: false },
+  { area: 'cloud',     accent: 'green', featured: false },
 ];
 ---
 
 <section id="stack">
   <div class="section">
-    <p class="section-label">03 — STACK</p>
+    <p class="section-label" data-i18n="stack.label">03 — STACK</p>
 
-    <h2 class="section-heading" data-reveal>
+    <h2 class="section-heading" data-reveal data-i18n-html="stack.heading">
       Herramientas que<br />
       <span class="gradient-text">domino.</span>
     </h2>
@@ -32,7 +31,7 @@ const cellMeta = [
           >
             <div class="cell-header">
               <Icon name={category.icon} class={`cell-icon ${accent}`} aria-hidden="true" />
-              <span class="cell-name">{category.name}</span>
+              <span class="cell-name" data-i18n={`stack.cat.${cellMeta[i].area}`}>{category.name}</span>
             </div>
             <div class="pills">
               {category.items.map((item) => (
@@ -64,11 +63,7 @@ const cellMeta = [
     margin-bottom: 3rem;
   }
 
-  /* ── Bento grid ───────────────────────────────────────────
-     Desktop (≥ 900px):
-       row 1 │ lenguajes (×2) │ frontend │ cloud     │
-       row 2 │ backend        │ ia (×2)  │ databases │
-  ──────────────────────────────────────────────────────── */
+  /* ── Bento grid ────────────────────────────────────────── */
   .bento-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -85,7 +80,6 @@ const cellMeta = [
   .bento-cell-4 { grid-area: databases; }
   .bento-cell-5 { grid-area: cloud;     }
 
-  /* ── Cell base ─────────────────────────────────────────── */
   .bento-cell {
     position: relative;
     background: #0D1520;
@@ -96,7 +90,6 @@ const cellMeta = [
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
-  /* Top accent bar */
   .bento-cell::before {
     content: '';
     position: absolute;
@@ -107,17 +100,14 @@ const cellMeta = [
   .bento-cell.cyan::before  { background: linear-gradient(90deg, #00CFFF, transparent); }
   .bento-cell.green::before { background: linear-gradient(90deg, #00FF87, transparent); }
 
-  /* Featured cells: ambient radial glow */
   .bento-cell.featured.cyan  { background: radial-gradient(ellipse at 85% 15%, #00CFFF0A 0%, #0D1520 55%); }
   .bento-cell.featured.green { background: radial-gradient(ellipse at 15% 85%, #00FF870A 0%, #0D1520 55%); }
 
-  /* Hover */
   .bento-cell.cyan:hover  { border-color: #00CFFF40; box-shadow: 0 4px 32px #00CFFF08; }
   .bento-cell.green:hover { border-color: #00FF8740; box-shadow: 0 4px 32px #00FF8708; }
   .bento-cell.featured.cyan:hover  { border-color: #00CFFF60; box-shadow: 0 4px 40px #00CFFF14; }
   .bento-cell.featured.green:hover { border-color: #00FF8760; box-shadow: 0 4px 40px #00FF8714; }
 
-  /* ── Cell header ───────────────────────────────────────── */
   .cell-header {
     display: flex;
     align-items: center;
@@ -127,11 +117,7 @@ const cellMeta = [
     border-bottom: 1px solid #1A2535;
   }
 
-  .cell-icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-  }
+  .cell-icon { width: 16px; height: 16px; flex-shrink: 0; }
   .cell-icon.cyan  { color: #00CFFF; }
   .cell-icon.green { color: #00FF87; }
 
@@ -144,12 +130,7 @@ const cellMeta = [
     color: #4A6070;
   }
 
-  /* ── Pills ─────────────────────────────────────────────── */
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
   .tech-pill {
     display: inline-flex;
@@ -166,12 +147,8 @@ const cellMeta = [
     transition: border-color 0.25s ease, color 0.25s ease;
     cursor: default;
   }
-  .tech-pill.primary {
-    color: #C8DDE8;
-    border-color: #2A3545;
-  }
+  .tech-pill.primary { color: #C8DDE8; border-color: #2A3545; }
 
-  /* All pills in a cell react on card hover */
   .bento-cell.cyan:hover  .tech-pill { border-color: #00CFFF20; }
   .bento-cell.green:hover .tech-pill { border-color: #00FF8720; }
   .bento-cell.cyan:hover  .tech-pill.primary { border-color: #00CFFF50; color: #E8EDF2; }
@@ -180,7 +157,6 @@ const cellMeta = [
   .tech-icon { width: 14px; height: 14px; flex-shrink: 0; }
   .tech-icon.invert { filter: invert(1) brightness(2); }
 
-  /* ── Responsive ────────────────────────────────────────── */
   @media (max-width: 900px) {
     .bento-grid {
       grid-template-columns: repeat(2, 1fr);

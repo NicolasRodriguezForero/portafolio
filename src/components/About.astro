@@ -3,8 +3,7 @@
 
 <section id="about">
   <div class="section">
-    <p class="section-label">01 — SOBRE MÍ</p>
-
+    <p class="section-label" data-i18n="about.label">01 — SOBRE MÍ</p>
 
     <div class="about-grid">
       <!-- Photo column -->
@@ -27,28 +26,32 @@
         <div class="photo-stats">
           <div class="stat">
             <span class="stat-value gradient-text">2022</span>
-            <span class="stat-label">Inicio en programación</span>
+            <span class="stat-label" data-i18n="about.stat.since">Inicio en programación</span>
           </div>
           <div class="stat">
             <span class="stat-value gradient-text">6+</span>
-            <span class="stat-label">Proyectos en producción</span>
+            <span class="stat-label" data-i18n="about.stat.projects">Proyectos en producción</span>
           </div>
           <div class="stat">
             <span class="stat-value gradient-text">B2</span>
-            <span class="stat-label">Inglés</span>
+            <span class="stat-label" data-i18n="about.stat.english">Inglés</span>
           </div>
         </div>
       </div>
 
       <!-- Bio column -->
       <div class="bio-col">
-        <h2 class="about-heading" data-reveal>
+        <h2
+          class="about-heading"
+          data-reveal
+          data-i18n-html="about.heading"
+        >
           Desarrollador que<br />
           <span class="gradient-text">piensa en sistemas.</span>
         </h2>
 
         <div class="bio-text">
-          <p data-reveal>
+          <p data-reveal data-i18n-html="about.bio1">
             Soy Nicolas, desarrollador Full Stack e ingeniero en Ciencias de la Computación e Inteligencia Artificial cursando
             Ingeniería en Ciencias de la Computación e Inteligencia Artificial en la
             Universidad Sergio Arboleda (Bogotá), donde hago parte del Programa de
@@ -57,7 +60,7 @@
             end-to-end a clientes reales.
           </p>
 
-          <p data-reveal>
+          <p data-reveal data-i18n="about.bio2">
             Me especializo en construir productos que integran IA de manera significativa:
             sistemas RAG en producción, plataformas SaaS multi-tenant, agentes LangGraph,
             y aplicaciones móviles con Flutter. Disfruto especialmente los proyectos donde
@@ -65,7 +68,7 @@
             armonía para resolver un problema concreto.
           </p>
 
-          <p data-reveal>
+          <p data-reveal data-i18n="about.bio3">
             Creo que el criterio técnico no se mide solo en líneas de código, sino en
             las decisiones de arquitectura que hacen que un sistema sea mantenible,
             escalable y confiable. Aprendo continuamente, me adapto rápido, y siempre
@@ -73,16 +76,16 @@
           </p>
         </div>
 
-        <blockquote class="highlight-quote" data-reveal>
+        <blockquote class="highlight-quote" data-reveal data-i18n-html="about.quote">
           <span class="quote-mark gradient-text">"</span>
           No solo escribo código — diseño soluciones que duran.
           <span class="quote-mark gradient-text">"</span>
         </blockquote>
 
         <div class="about-badges" data-reveal>
-          <span class="badge">Universidad Sergio Arboleda</span>
-          <span class="badge">Programa de Honores 2025-II · 2026-I</span>
-          <span class="badge">Bogotá, Colombia</span>
+          <span class="badge" data-i18n="about.badge.university">Universidad Sergio Arboleda</span>
+          <span class="badge" data-i18n="about.badge.honors">Programa de Honores 2025-II · 2026-I</span>
+          <span class="badge" data-i18n="about.badge.location">Bogotá, Colombia</span>
         </div>
       </div>
     </div>

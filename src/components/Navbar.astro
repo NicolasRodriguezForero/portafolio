@@ -1,12 +1,12 @@
 ---
 const navLinks = [
-  { href: '#about',      label: 'Sobre mí' },
-  { href: '#education',  label: 'Educación' },
-  { href: '#stack',      label: 'Stack' },
-  { href: '#projects',   label: 'Proyectos' },
-  { href: '#experience', label: 'Experiencia' },
-  { href: '#skills',     label: 'Habilidades' },
-  { href: '#contact',    label: 'Contacto' },
+  { href: '#about',      label: 'Sobre mí',     key: 'nav.about'      },
+  { href: '#education',  label: 'Educación',    key: 'nav.education'  },
+  { href: '#stack',      label: 'Stack',        key: 'nav.stack'      },
+  { href: '#projects',   label: 'Proyectos',    key: 'nav.projects'   },
+  { href: '#experience', label: 'Experiencia',  key: 'nav.experience' },
+  { href: '#skills',     label: 'Habilidades',  key: 'nav.skills'     },
+  { href: '#contact',    label: 'Contacto',     key: 'nav.contact'    },
 ];
 ---
 
@@ -25,26 +25,43 @@ const navLinks = [
     <ul class="nav-links" role="list">
       {navLinks.map((link) => (
         <li>
-          <a href={link.href} class="nav-link">{link.label}</a>
+          <a href={link.href} class="nav-link" data-i18n={link.key}>{link.label}</a>
         </li>
       ))}
     </ul>
 
-    <button id="menu-toggle" class="menu-btn" aria-label="Abrir menú" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <div class="nav-right">
+      <!-- Language toggle — always visible -->
+      <button
+        class="lang-toggle"
+        data-i18n-aria="nav.lang.aria"
+        aria-label="Cambiar idioma"
+      >
+        <span class="lang-label">EN</span>
+      </button>
+
+      <button id="menu-toggle" class="menu-btn" data-i18n-aria="nav.menu.aria" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </nav>
 
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <ul role="list">
       {navLinks.map((link) => (
         <li>
-          <a href={link.href} class="mobile-link">{link.label}</a>
+          <a href={link.href} class="mobile-link" data-i18n={link.key}>{link.label}</a>
         </li>
       ))}
     </ul>
+    <!-- Language toggle in mobile menu -->
+    <div class="mobile-lang">
+      <button class="lang-toggle mobile-lang-btn" data-i18n-aria="nav.lang.aria" aria-label="Cambiar idioma">
+        <span class="lang-label">EN</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -114,6 +131,39 @@ const navLinks = [
   .nav-link:hover { color: #E8EDF2; }
   .nav-link:hover::after { width: 100%; }
 
+  /* ── Right side group ─────────────────────────────────── */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* ── Language toggle ──────────────────────────────────── */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.65rem;
+    height: 26px;
+    min-width: 38px;
+    background: transparent;
+    border: 1px solid #1A2535;
+    border-radius: 100px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #8899AA;
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease;
+    gap: 0.4rem;
+  }
+  .lang-toggle:hover {
+    border-color: #00FF87;
+    color: #00FF87;
+  }
+
+  /* ── Menu button ─────────────────────────────────────── */
   .menu-btn {
     display: none;
     flex-direction: column;
@@ -131,15 +181,17 @@ const navLinks = [
     transition: all 0.3s ease;
   }
 
+  /* ── Mobile menu ─────────────────────────────────────── */
   .mobile-menu {
     display: none;
     position: fixed;
     inset: 68px 0 0;
     background: rgba(5, 10, 15, 0.97);
     backdrop-filter: blur(20px);
-    padding: 3rem clamp(1.25rem, 5vw, 6rem);
+    padding: 3rem clamp(1.25rem, 5vw, 6rem) 2rem;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
   }
   .mobile-menu.open {
     transform: translateX(0);
@@ -157,6 +209,24 @@ const navLinks = [
     transition: color 0.2s ease;
   }
   .mobile-link:hover { color: #00FF87; }
+
+  .mobile-lang {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1A2535;
+  }
+  .mobile-lang-btn {
+    width: auto;
+    padding: 0.5rem 1rem;
+    height: auto;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    gap: 0.5rem;
+  }
+  .mobile-lang-text {
+    color: #4A6070;
+    font-weight: 400;
+  }
 
   @media (max-width: 900px) {
     .nav-links { display: none; }

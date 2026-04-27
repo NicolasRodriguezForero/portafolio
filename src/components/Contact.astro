@@ -3,16 +3,16 @@
 
 <section id="contact">
   <div class="section">
-    <p class="section-label">07 — CONTACTO</p>
+    <p class="section-label" data-i18n="contact.label">07 — CONTACTO</p>
 
     <div class="contact-inner">
       <div class="contact-heading-col" data-reveal>
-        <h2 class="contact-heading">
+        <h2 class="contact-heading" data-i18n-html="contact.heading">
           ¿Quieres<br />
           trabajar<br />
           <span class="gradient-text">conmigo?</span>
         </h2>
-        <p class="contact-sub">
+        <p class="contact-sub" data-i18n="contact.sub">
           Estoy disponible para proyectos freelance, posiciones full-time y colaboraciones interesantes.
           Respondo en menos de 24 horas.
         </p>
@@ -25,7 +25,7 @@
               <rect x="2" y="4" width="20" height="16" rx="2"/>
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            Escríbeme ahora por correo
+            <span data-i18n="contact.cta">Escríbeme ahora por correo</span>
           </a>
         </div>
       </div>
@@ -46,6 +46,7 @@
           <button
             class="copy-btn"
             data-copy="niquimiqui@gmail.com"
+            data-i18n-aria="contact.copy.aria"
             aria-label="Copiar email al portapapeles"
           >
             <svg class="icon-copy" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -64,6 +65,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="contact-card contact-card-link"
+          data-i18n-aria="contact.github.aria"
           aria-label="Perfil de GitHub de Nicolas Rodriguez"
         >
           <div class="contact-card-icon">
@@ -86,6 +88,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="contact-card contact-card-link"
+          data-i18n-aria="contact.linkedin.aria"
           aria-label="Perfil de LinkedIn de Nicolas Rodriguez"
         >
           <div class="contact-card-icon">
@@ -178,10 +181,7 @@
   }
   .contact-card:hover .contact-card-icon { color: #00FF87; }
 
-  .contact-card-content {
-    flex: 1;
-    min-width: 0;
-  }
+  .contact-card-content { flex: 1; min-width: 0; }
   .contact-card-label {
     display: block;
     font-family: 'Inter', system-ui, sans-serif;
@@ -225,9 +225,7 @@
   .contact-card-link:hover .external-icon { color: #00FF87; }
 
   /* CTA */
-  .contact-cta {
-    margin-top: 2rem;
-  }
+  .contact-cta { margin-top: 2rem; }
 
   .btn-primary-large {
     display: inline-flex;
@@ -266,7 +264,6 @@
       try {
         await navigator.clipboard.writeText(text);
       } catch {
-        // Fallback for non-HTTPS
         const ta = document.createElement('textarea');
         ta.value = text;
         ta.style.position = 'fixed';

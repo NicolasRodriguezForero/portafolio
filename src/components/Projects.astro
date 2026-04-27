@@ -4,16 +4,15 @@ import { projects } from '../data/projects';
 
 <section id="projects">
   <div class="projects-header section">
-    <p class="section-label">04 — PROYECTOS</p>
-    <h2 class="section-heading" data-reveal>
+    <p class="section-label" data-i18n="projects.label">04 — PROYECTOS</p>
+    <h2 class="section-heading" data-reveal data-i18n-html="projects.heading">
       Lo que he<br />
       <span class="gradient-text">construido.</span>
     </h2>
     <p class="projects-hint" data-reveal>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M12 5v14M5 12l7 7 7-7"/>
-      </svg>
-      Desplázate para explorar
+      </svg><span data-i18n="projects.hint">Desplázate para explorar</span>
     </p>
   </div>
 
@@ -58,8 +57,8 @@ import { projects } from '../data/projects';
               </div>
             </div>
 
-            <h3 class="card-title">{project.title}</h3>
-            <p class="card-desc">{project.description}</p>
+            <h3 class="card-title" data-i18n={`project.${project.id}.title`}>{project.title}</h3>
+            <p class="card-desc" data-i18n={`project.${project.id}.description`}>{project.description}</p>
 
             <div class="card-tags">
               {project.tags.slice(0, 4).map((tag) => (
@@ -144,12 +143,8 @@ import { projects } from '../data/projects';
     height: 2px;
     width: 100%;
   }
-  .card-accent.green {
-    background: linear-gradient(90deg, #00FF87, transparent);
-  }
-  .card-accent.cyan {
-    background: linear-gradient(90deg, #00CFFF, transparent);
-  }
+  .card-accent.green { background: linear-gradient(90deg, #00FF87, transparent); }
+  .card-accent.cyan  { background: linear-gradient(90deg, #00CFFF, transparent); }
 
   .card-body {
     padding: 1.5rem;
@@ -165,10 +160,7 @@ import { projects } from '../data/projects';
     justify-content: space-between;
   }
 
-  .card-links {
-    display: flex;
-    gap: 0.75rem;
-  }
+  .card-links { display: flex; gap: 0.75rem; }
   .card-link {
     color: #4A6070;
     transition: color 0.2s ease;
@@ -216,15 +208,8 @@ import { projects } from '../data/projects';
 
   /* Mobile: vertical stack */
   @media (max-width: 768px) {
-    #projects-wrapper {
-      overflow: visible;
-    }
-    #projects-track {
-      flex-direction: column;
-      width: 100%;
-    }
-    .project-card {
-      width: 100%;
-    }
+    #projects-wrapper { overflow: visible; }
+    #projects-track { flex-direction: column; width: 100%; }
+    .project-card { width: 100%; }
   }
 </style>

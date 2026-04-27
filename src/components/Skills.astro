@@ -4,24 +4,28 @@ import { Icon } from 'astro-icon/components';
 const skillCategories = [
   {
     name: 'Liderazgo & Gestión',
+    slug: 'liderazgo',
     icon: 'lucide:zap',
     color: 'green' as const,
     skills: ['Liderazgo técnico', 'Gestión de proyectos', 'Emprendimiento', 'Toma de decisiones técnicas'],
   },
   {
     name: 'Comunicación',
+    slug: 'comunicacion',
     icon: 'lucide:message-circle',
     color: 'cyan' as const,
     skills: ['Comunicación técnica', 'Trabajo en equipo', 'Atención al cliente', 'Documentación de proyectos'],
   },
   {
     name: 'Pensamiento',
+    slug: 'pensamiento',
     icon: 'lucide:brain',
     color: 'green' as const,
     skills: ['Pensamiento analítico', 'Resolución de problemas', 'Investigación aplicada', 'Diseño de arquitecturas'],
   },
   {
     name: 'Actitud',
+    slug: 'actitud',
     icon: 'lucide:rocket',
     color: 'cyan' as const,
     skills: ['Proactividad', 'Aprendizaje continuo', 'Adaptación a tecnologías', 'Orientación a la calidad'],
@@ -29,7 +33,7 @@ const skillCategories = [
 ];
 
 const languages = [
-  { name: 'Español', level: 'Nativo',       code: 'ES', color: 'green' as const },
+  { name: 'Español', level: 'Nativo',        code: 'ES', color: 'green' as const },
   { name: 'Inglés',  level: 'B2 — Avanzado', code: 'EN', color: 'cyan'  as const },
   { name: 'Francés', level: 'A1 — Básico',   code: 'FR', color: 'green' as const },
 ];
@@ -37,9 +41,9 @@ const languages = [
 
 <section id="skills">
   <div class="section">
-    <p class="section-label">06 — HABILIDADES</p>
+    <p class="section-label" data-i18n="skills.label">06 — HABILIDADES</p>
 
-    <h2 class="section-heading" data-reveal>
+    <h2 class="section-heading" data-reveal data-i18n-html="skills.heading">
       Más allá del<br />
       <span class="gradient-text">código.</span>
     </h2>
@@ -49,11 +53,11 @@ const languages = [
         <div class={`skill-card ${cat.color}`} data-stagger-item>
           <div class="skill-card-header">
             <Icon name={cat.icon} class={`skill-cat-icon ${cat.color}`} aria-hidden="true" />
-            <span class="skill-cat-name">{cat.name}</span>
+            <span class="skill-cat-name" data-i18n={`skills.cat.${cat.slug}`}>{cat.name}</span>
           </div>
           <div class="skill-tags">
-            {cat.skills.map((skill) => (
-              <span class={`skill-tag ${cat.color}`}>{skill}</span>
+            {cat.skills.map((skill, si) => (
+              <span class={`skill-tag ${cat.color}`} data-i18n={`skills.${cat.slug}.${si}`}>{skill}</span>
             ))}
           </div>
         </div>
@@ -62,14 +66,14 @@ const languages = [
 
     <!-- Languages -->
     <div class="languages-block" data-reveal>
-      <h3 class="languages-title">Idiomas</h3>
+      <h3 class="languages-title" data-i18n="skills.languages.title">Idiomas</h3>
       <div class="lang-cards">
         {languages.map((lang) => (
           <div class={`lang-card ${lang.color}`}>
             <span class="lang-code" aria-hidden="true">{lang.code}</span>
             <div class="lang-info">
               <span class="lang-name">{lang.name}</span>
-              <span class={`lang-badge ${lang.color}`}>{lang.level}</span>
+              <span class={`lang-badge ${lang.color}`} data-i18n={`skills.lang.${lang.code.toLowerCase()}.level`}>{lang.level}</span>
             </div>
           </div>
         ))}
@@ -114,7 +118,7 @@ const languages = [
   .skill-card.green:hover { border-color: #00FF8760; }
   .skill-card.cyan:hover  { border-color: #00CFFF60; }
 
-  /* Top accent bar — same pattern as project cards */
+  /* Top accent bar */
   .skill-card::before {
     content: '';
     position: absolute;
@@ -150,7 +154,7 @@ const languages = [
     color: #A0B4C8;
   }
 
-  /* Skill tags — wrap pills, no level indicator */
+  /* Skill tags */
   .skill-tags {
     display: flex;
     flex-wrap: wrap;
@@ -169,7 +173,6 @@ const languages = [
     transition: border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
   }
 
-  /* All tags in a card light up together on card hover */
   .skill-card.green:hover .skill-tag {
     border-color: #00FF8745;
     color: #C8DDE8;
