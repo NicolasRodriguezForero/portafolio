@@ -91,7 +91,9 @@ const navLinks = [
     transform: translateX(-50%);
     width: min(1120px, calc(100% - 2rem));
     z-index: 100;
-    padding: 0 0.6rem 0 1.25rem;
+    /* Right inset (11px + 1px border) matches the 12px above/below the language button,
+       so its rounded edge stays concentric with the navbar's curve */
+    padding: 0 11px 0 1.25rem;
     /* Transparent at the top of the page; the pill background appears once scrolled */
     background: transparent;
     border: 1px solid transparent;
