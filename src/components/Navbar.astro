@@ -1,12 +1,13 @@
 ---
+// `sections` lists every section that should light up the link (Skills covers the stack and soft skills)
 const navLinks = [
-  { href: '#about',      label: 'Sobre mí',     key: 'nav.about'      },
-  { href: '#education',  label: 'Educación',    key: 'nav.education'  },
-  { href: '#stack',      label: 'Stack',        key: 'nav.stack'      },
-  { href: '#projects',   label: 'Proyectos',    key: 'nav.projects'   },
-  { href: '#experience', label: 'Experiencia',  key: 'nav.experience' },
-  { href: '#skills',     label: 'Habilidades',  key: 'nav.skills'     },
-  { href: '#contact',    label: 'Contacto',     key: 'nav.contact'    },
+  { href: '#hero',       label: 'Inicio',       key: 'nav.home',       sections: ['hero']            },
+  { href: '#about',      label: 'Sobre mí',     key: 'nav.about',      sections: ['about']           },
+  { href: '#experience', label: 'Experiencia',  key: 'nav.experience', sections: ['experience']      },
+  { href: '#projects',   label: 'Proyectos',    key: 'nav.projects',   sections: ['projects']        },
+  { href: '#stack',      label: 'Habilidades',  key: 'nav.skills',     sections: ['stack', 'skills'] },
+  { href: '#education',  label: 'Educación',    key: 'nav.education',  sections: ['education']       },
+  { href: '#contact',    label: 'Contacto',     key: 'nav.contact',    sections: ['contact']         },
 ];
 ---
 
@@ -14,7 +15,9 @@ const navLinks = [
   <nav>
     <a href="/" class="brand" aria-label="Nicolas Rodriguez Forero">
       <img
-        src="/images/logo.png"
+        src="/images/logo.webp"
+        width="56"
+        height="30"
         alt="Logo Nicolas Rodriguez"
         class="brand-logo"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
@@ -25,20 +28,35 @@ const navLinks = [
     <ul class="nav-links" role="list">
       {navLinks.map((link) => (
         <li>
-          <a href={link.href} class="nav-link" data-i18n={link.key}>{link.label}</a>
+          <a href={link.href} class="nav-link" data-i18n={link.key} data-sections={link.sections.join(' ')}>{link.label}</a>
         </li>
       ))}
     </ul>
 
     <div class="nav-right">
-      <!-- Language toggle — always visible -->
-      <button
-        class="lang-toggle"
-        data-i18n-aria="nav.lang.aria"
-        aria-label="Cambiar idioma"
-      >
-        <span class="lang-label">EN</span>
-      </button>
+      <!-- Language dropdown — label shows the current language (set by scripts/i18n.ts) -->
+      <div class="lang-select">
+        <button
+          class="lang-trigger"
+          type="button"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          data-i18n-aria="nav.lang.aria"
+          aria-label="Cambiar idioma"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span class="lang-current">Español</span>
+          <svg class="lang-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <ul class="lang-menu" role="listbox">
+          <li><button type="button" class="lang-option" role="option" data-lang="es">Español</button></li>
+          <li><button type="button" class="lang-option" role="option" data-lang="en">English</button></li>
+        </ul>
+      </div>
 
       <button id="menu-toggle" class="menu-btn" data-i18n-aria="nav.menu.aria" aria-label="Abrir menú" aria-expanded="false">
         <span></span>
@@ -57,39 +75,40 @@ const navLinks = [
       </li>
     ))}
   </ul>
-  <!-- Language toggle in mobile menu -->
+  <!-- Language options in mobile menu -->
   <div class="mobile-lang">
-    <button class="lang-toggle mobile-lang-btn" data-i18n-aria="nav.lang.aria" aria-label="Cambiar idioma">
-      <span class="lang-label">EN</span>
-    </button>
+    <button type="button" class="lang-option mobile-lang-btn" data-lang="es">Español</button>
+    <button type="button" class="lang-option mobile-lang-btn" data-lang="en">English</button>
   </div>
 </div>
 
 <style>
+  /* Floating pill navbar */
   #navbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1120px, calc(100% - 2rem));
     z-index: 100;
-    padding: 0 clamp(1.25rem, 5vw, 6rem);
-    background: rgba(5, 10, 15, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid #1A2535;
+    padding: 0 0.6rem 0 1.25rem;
+    background: rgba(13, 21, 32, 0.6);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid #1A2535;
+    border-radius: 100px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 68px;
-    max-width: 1200px;
-    margin: 0 auto;
+    height: 56px;
   }
 
   .brand-logo {
-    height: 36px;
+    height: 30px;
     width: auto;
     display: block;
   }
@@ -104,32 +123,29 @@ const navLinks = [
 
   .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 0.15rem;
     list-style: none;
   }
 
   .nav-link {
+    display: block;
+    padding: 0.45rem 0.85rem;
+    border-radius: 100px;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: #8899AA;
     text-decoration: none;
     letter-spacing: 0.02em;
-    position: relative;
-    transition: color 0.25s ease;
+    transition: color 0.25s ease, background-color 0.25s ease;
   }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: linear-gradient(90deg, #00FF87, #00CFFF);
-    transition: width 0.3s ease;
+  .nav-link:hover { color: #E8EDF2; background: rgba(255, 255, 255, 0.04); }
+  /* Section currently in view (set by the observer below) */
+  .nav-link.active {
+    color: #00FF87;
+    background: #00FF8712;
+    box-shadow: inset 0 0 0 1px #00FF8730;
   }
-  .nav-link:hover { color: #E8EDF2; }
-  .nav-link:hover::after { width: 100%; }
 
   /* ── Right side group ─────────────────────────────────── */
   .nav-right {
@@ -138,29 +154,78 @@ const navLinks = [
     gap: 0.6rem;
   }
 
-  /* ── Language toggle ──────────────────────────────────── */
-  .lang-toggle {
+  /* ── Language dropdown ────────────────────────────────── */
+  .lang-select { position: relative; }
+
+  .lang-trigger {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 0.65rem;
-    height: 26px;
-    min-width: 38px;
+    gap: 0.45rem;
+    padding: 0 0.8rem;
+    height: 34px;
     background: transparent;
     border: 1px solid #1A2535;
     border-radius: 100px;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: #8899AA;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #A0B4C8;
     cursor: pointer;
     transition: border-color 0.25s ease, color 0.25s ease;
-    gap: 0.4rem;
   }
-  .lang-toggle:hover {
-    border-color: #00FF87;
+  .lang-trigger:hover,
+  .lang-select.open .lang-trigger {
+    border-color: #00FF8760;
     color: #00FF87;
+  }
+  .lang-chevron { transition: transform 0.25s ease; }
+  .lang-select.open .lang-chevron { transform: rotate(180deg); }
+
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 150px;
+    list-style: none;
+    padding: 0.35rem;
+    background: rgba(13, 21, 32, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #1A2535;
+    border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+  .lang-select.open .lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.8rem;
+    background: none;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.82rem;
+    color: #A0B4C8;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .lang-option:hover { background: rgba(255, 255, 255, 0.05); color: #E8EDF2; }
+  .lang-option.active { color: #00FF87; }
+  .lang-menu .lang-option.active::after {
+    content: '✓';
+    font-size: 0.75rem;
   }
 
   /* ── Menu button ─────────────────────────────────────── */
@@ -185,12 +250,13 @@ const navLinks = [
   .mobile-menu {
     display: none;
     position: fixed;
-    inset: 68px 0 0;
+    inset: 0;
     z-index: 99;
     background: rgba(5, 10, 15, 0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 3rem clamp(1.25rem, 5vw, 6rem) 2rem;
+    /* Leaves room for the floating navbar on top */
+    padding: 100px clamp(1.25rem, 5vw, 6rem) 2rem;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     overflow-y: auto;
@@ -213,21 +279,21 @@ const navLinks = [
   .mobile-link:hover { color: #00FF87; }
 
   .mobile-lang {
+    display: flex;
+    gap: 0.5rem;
     margin-top: 2rem;
     padding-top: 1.5rem;
     border-top: 1px solid #1A2535;
   }
   .mobile-lang-btn {
     width: auto;
-    padding: 0.5rem 1rem;
-    height: auto;
-    border-radius: 6px;
-    font-size: 0.78rem;
-    gap: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid #1A2535;
+    border-radius: 100px;
   }
-  .mobile-lang-text {
-    color: #4A6070;
-    font-weight: 400;
+  .mobile-lang-btn.active {
+    border-color: #00FF8760;
+    background: #00FF8712;
   }
 
   @media (max-width: 900px) {
@@ -247,6 +313,27 @@ const navLinks = [
     mobileMenu?.classList.toggle('open');
     toggleBtn.setAttribute('aria-expanded', String(!isOpen));
     mobileMenu?.setAttribute('aria-hidden', String(isOpen));
+  });
+
+  // Highlight the nav link of the section in the middle of the viewport
+  const navLinkEls = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinkEls.forEach((a) => {
+          const sections = (a.dataset.sections ?? '').split(' ');
+          a.classList.toggle('active', sections.includes(entry.target.id));
+        });
+      });
+    },
+    { rootMargin: '-45% 0px -50% 0px' },
+  );
+  navLinkEls.forEach((a) => {
+    (a.dataset.sections ?? '').split(' ').forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
   });
 
   mobileLinks?.forEach((link) => {

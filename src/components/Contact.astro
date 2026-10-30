@@ -13,8 +13,7 @@
           <span class="gradient-text">conmigo?</span>
         </h2>
         <p class="contact-sub" data-i18n="contact.sub">
-          Estoy disponible para proyectos freelance, posiciones full-time y colaboraciones interesantes.
-          Respondo en menos de 24 horas.
+          Estoy abierto a colaboraciones, proyectos de IA y nuevas oportunidades. Respondo en menos de 24 horas.
         </p>
         <div class="contact-cta">
           <a
@@ -26,6 +25,18 @@
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
             <span data-i18n="contact.cta">Escríbeme ahora por correo</span>
+          </a>
+          <a
+            href="/cv/CV_Nicolas_Rodriguez_Forero_ES.pdf"
+            class="cv-link"
+            data-i18n-href="hero.cv.href"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            <span data-i18n="contact.cv">Descargar CV (PDF)</span>
           </a>
         </div>
       </div>
@@ -152,9 +163,10 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.25rem;
-    background: #0D1520;
+    background: var(--surface);
+    box-shadow: var(--surface-highlight);
     border: 1px solid #1A2535;
-    border-radius: 8px;
+    border-radius: 16px;
     transition: border-color 0.25s ease;
   }
   .contact-card:hover { border-color: #2A3545; }
@@ -211,7 +223,7 @@
     padding: 0.25rem;
     display: flex;
     align-items: center;
-    border-radius: 4px;
+    border-radius: 8px;
     transition: color 0.2s ease;
   }
   .copy-btn:hover { color: #E8EDF2; }
@@ -225,7 +237,26 @@
   .contact-card-link:hover .external-icon { color: #00FF87; }
 
   /* CTA */
-  .contact-cta { margin-top: 2rem; }
+  .contact-cta {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .cv-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #A0B4C8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .cv-link:hover { color: #00FF87; }
 
   .btn-primary-large {
     display: inline-flex;
@@ -238,7 +269,7 @@
     font-size: 1rem;
     font-weight: 700;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 100px;
     letter-spacing: 0.02em;
     transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }

@@ -1,8 +1,8 @@
 const DEFAULT_ROLES = [
-  'Desarrollador Full Stack',
-  'Ing. en Ciencias de la Computación e IA',
-  'Co-fundador @ Tech Craft Solutions',
-  'Construyo sistemas que piensan',
+  'Ingeniero en Inteligencia Artificial',
+  'Ingeniero de Proyectos @ InConcert',
+  'Desarrollador Backend @ PriceIt',
+  'RAG · LangGraph · Agentes de IA',
 ];
 
 export function initTypewriter(elementId: string): void {

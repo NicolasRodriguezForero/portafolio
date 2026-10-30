@@ -2,6 +2,9 @@ import { translations, type Lang } from '../i18n/translations';
 
 const STORAGE_KEY = 'portfolio-lang';
 
+// Each language is shown by its own name in the dropdown
+const LANG_NAMES: Record<Lang, string> = { es: 'Español', en: 'English' };
+
 function detectLang(): Lang {
   try {
     const stored = localStorage.getItem(STORAGE_KEY) as Lang | null;
@@ -38,15 +41,26 @@ function applyTranslations(lang: Lang): void {
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
 
+  // href replacements (language-specific files such as the CV)
+  document.querySelectorAll<HTMLAnchorElement>('[data-i18n-href]').forEach((el) => {
+    const key = el.dataset.i18nHref!;
+    if (t[key] !== undefined) el.href = t[key];
+  });
+
   // aria-label replacements
   document.querySelectorAll<HTMLElement>('[data-i18n-aria]').forEach((el) => {
     const key = el.dataset.i18nAria!;
     if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
   });
 
-  // Update lang toggle button labels
-  document.querySelectorAll<HTMLElement>('.lang-label').forEach((el) => {
-    el.textContent = lang === 'es' ? 'EN' : 'ES';
+  // Language dropdown: trigger shows the current language, options mark the active one
+  document.querySelectorAll<HTMLElement>('.lang-current').forEach((el) => {
+    el.textContent = LANG_NAMES[lang];
+  });
+  document.querySelectorAll<HTMLButtonElement>('.lang-option').forEach((opt) => {
+    const isActive = opt.dataset.lang === lang;
+    opt.classList.toggle('active', isActive);
+    opt.setAttribute('aria-selected', String(isActive));
   });
 
   // Restart typewriter with new language strings
@@ -60,18 +74,48 @@ function applyTranslations(lang: Lang): void {
   restart?.(roles);
 }
 
-function setupToggleButtons(): void {
-  document.querySelectorAll<HTMLButtonElement>('.lang-toggle').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const current = detectLang();
-      const next: Lang = current === 'es' ? 'en' : 'es';
-      try {
-        localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        // ignore
-      }
-      applyTranslations(next);
+function selectLang(lang: Lang): void {
+  try {
+    localStorage.setItem(STORAGE_KEY, lang);
+  } catch {
+    // ignore
+  }
+  applyTranslations(lang);
+}
+
+function setupLangSelect(): void {
+  const selects = document.querySelectorAll<HTMLElement>('.lang-select');
+
+  const close = (select: Element) => {
+    select.classList.remove('open');
+    select.querySelector('.lang-trigger')?.setAttribute('aria-expanded', 'false');
+  };
+
+  selects.forEach((select) => {
+    const trigger = select.querySelector<HTMLButtonElement>('.lang-trigger');
+    trigger?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = select.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', String(open));
     });
+  });
+
+  // Options live both in the dropdown and in the mobile menu
+  document.querySelectorAll<HTMLButtonElement>('.lang-option').forEach((opt) => {
+    opt.addEventListener('click', () => {
+      const lang = opt.dataset.lang;
+      if (lang === 'es' || lang === 'en') selectLang(lang);
+      selects.forEach(close);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    selects.forEach((select) => {
+      if (!select.contains(e.target as Node)) close(select);
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') selects.forEach(close);
   });
 }
 
@@ -90,16 +134,9 @@ export function initI18n(): void {
   // Patch DOM to the detected language
   applyTranslations(lang);
 
-  // Wire toggle buttons
-  setupToggleButtons();
+  // Wire the language dropdown
+  setupLangSelect();
 }
 
 // Public API — usable from inline scripts or other modules
-(window as Record<string, unknown>).setLang = (lang: Lang) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, lang);
-  } catch {
-    // ignore
-  }
-  applyTranslations(lang);
-};
+(window as Record<string, unknown>).setLang = selectLang;

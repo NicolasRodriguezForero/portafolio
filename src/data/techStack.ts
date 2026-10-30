@@ -45,6 +45,11 @@ export const techStack: TechCategory[] = [
       { name: 'LangGraph',   icon: 'lucide:git-branch', level: 'primary' },
       { name: 'RAG Systems', icon: 'lucide:search',     level: 'primary' },
       { name: 'ChromaDB',    icon: 'lucide:database',   level: 'primary' },
+      { name: 'Hybrid Search', icon: 'lucide:search-code', level: 'primary' },
+      { name: 'MCP',         icon: 'lucide:plug',       level: 'secondary' },
+      { name: 'Docling',     icon: 'lucide:file-text',  level: 'secondary' },
+      { name: 'Embeddings',  icon: 'lucide:sparkles',   level: 'secondary' },
+      { name: 'Keras',       icon: 'devicon:keras',     level: 'secondary' },
       { name: 'Ollama',      icon: 'lucide:cpu',        level: 'secondary' },
       { name: 'Pandas',      icon: 'devicon:pandas',    level: 'secondary' },
       { name: 'NumPy',       icon: 'devicon:numpy',     level: 'secondary' },
@@ -55,7 +60,8 @@ export const techStack: TechCategory[] = [
     icon: 'lucide:database',
     items: [
       { name: 'PostgreSQL', icon: 'devicon:postgresql', level: 'primary' },
-      { name: 'MongoDB',    icon: 'devicon:mongodb',    level: 'secondary' },
+      { name: 'MongoDB',    icon: 'devicon:mongodb',    level: 'primary' },
+      { name: 'Cosmos DB',  icon: 'devicon:cosmosdb',   level: 'secondary' },
       { name: 'Firebase',   icon: 'devicon:firebase',   level: 'secondary' },
       { name: 'MySQL',      icon: 'devicon:mysql',      level: 'secondary' },
       { name: 'Oracle SQL', icon: 'devicon:oracle',     level: 'secondary' },
@@ -67,8 +73,11 @@ export const techStack: TechCategory[] = [
     items: [
       { name: 'Docker',  icon: 'devicon:docker',                level: 'primary' },
       { name: 'Railway', icon: 'lucide:train-front',            level: 'primary' },
+      { name: 'Azure',   icon: 'devicon:azure',                 level: 'primary' },
       { name: 'AWS',     icon: 'devicon:amazonwebservices',     level: 'secondary' },
       { name: 'GCP',     icon: 'devicon:googlecloud',           level: 'secondary' },
+      { name: 'Linux',   icon: 'devicon:linux',                 level: 'secondary' },
+      { name: 'Asterisk', icon: 'lucide:phone-call',            level: 'secondary' },
     ],
   },
 ];

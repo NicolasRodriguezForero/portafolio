@@ -14,12 +14,13 @@ const cellMeta = [
 
 <section id="stack">
   <div class="section">
-    <p class="section-label" data-i18n="stack.label">03 — STACK</p>
+    <p class="section-label" data-i18n="stack.label">04 — STACK</p>
 
     <h2 class="section-heading" data-reveal data-i18n-html="stack.heading">
       Herramientas que<br />
       <span class="gradient-text">domino.</span>
     </h2>
+    <p class="section-sub" data-reveal data-i18n="stack.sub">Las herramientas que uso a diario para llevar productos de IA a producción.</p>
 
     <div class="bento-grid" data-stagger>
       {techStack.map((category, i) => {
@@ -82,7 +83,8 @@ const cellMeta = [
 
   .bento-cell {
     position: relative;
-    background: #0D1520;
+    background: var(--surface);
+    box-shadow: var(--surface-highlight);
     border: 1px solid #1A2535;
     border-radius: 14px;
     padding: 1.5rem;

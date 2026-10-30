@@ -3,6 +3,9 @@ export interface Project {
   title: string;
   description: string;
   longDescription: string;
+  period?: string;
+  role?: string;
+  highlights?: string[];
   tags: string[];
   githubUrl: string | null;
   demoUrl: string | null;

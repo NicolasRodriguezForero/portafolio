@@ -53,7 +53,7 @@ export function initSmoothAnchorLinks(): void {
 
     const lenis = getLenis();
     if (lenis) {
-      lenis.scrollTo(target as HTMLElement, { offset: -68, duration: 2.8 });
+      lenis.scrollTo(target as HTMLElement, { offset: -68, duration: 1.2 });
     } else {
       target.scrollIntoView({ behavior: 'smooth' });
     }

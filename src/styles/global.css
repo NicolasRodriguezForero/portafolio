@@ -1,9 +1,6 @@
 @import "tailwindcss";
 @import "./animations.css";
 
-/* ---- Google Fonts ---- */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
-
 /* ---- Tailwind v4 Theme ---- */
 @theme {
   --color-bg:        #050A0F;
@@ -17,6 +14,13 @@
 
   --font-display:    'Plus Jakarta Sans', system-ui, sans-serif;
   --font-body:       'Inter', system-ui, sans-serif;
+}
+
+/* ---- Surfaces ---- */
+:root {
+  /* Translucent card fill + top inner highlight (glass look) */
+  --surface: linear-gradient(160deg, rgba(20, 32, 46, 0.72) 0%, rgba(13, 21, 32, 0.55) 100%);
+  --surface-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* ---- Base ---- */
@@ -42,6 +46,92 @@ a, button, [role="button"], label, select, input[type="submit"], input[type="but
 body {
   overflow-x: hidden;
   background-color: #050A0F;
+}
+
+/* Dynamic ambient background (markup in BaseLayout).
+   Each glow is its own fixed layer and only `transform` is animated, so the browser
+   moves them on the GPU without repainting the page. */
+#ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+#ambient span {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  will-change: transform;
+}
+#ambient span:nth-child(1) {
+  top: -30vmax;
+  left: -25vmax;
+  background: radial-gradient(circle, #00FF8716 0%, transparent 60%);
+  animation: drift-a 40s ease-in-out infinite alternate;
+}
+#ambient span:nth-child(2) {
+  top: 10vh;
+  right: -35vmax;
+  background: radial-gradient(circle, #00CFFF14 0%, transparent 60%);
+  animation: drift-b 52s ease-in-out infinite alternate;
+}
+#ambient span:nth-child(3) {
+  bottom: -40vmax;
+  left: 15vw;
+  background: radial-gradient(circle, #00FF870F 0%, #00CFFF08 30%, transparent 60%);
+  animation: drift-c 64s ease-in-out infinite alternate;
+}
+
+@keyframes drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(22vw, 18vh, 0) scale(1.15); }
+}
+@keyframes drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.1); }
+  to   { transform: translate3d(-25vw, 25vh, 0) scale(0.9); }
+}
+@keyframes drift-c {
+  from { transform: translate3d(0, 0, 0) scale(0.95); }
+  to   { transform: translate3d(-15vw, -30vh, 0) scale(1.2); }
+}
+
+/* Hero title gradient repaints every frame, so it only runs while the hero is visible */
+#hero.is-offscreen .gradient-text-animated { animation-play-state: paused; }
+
+/* Cursor-following spotlight on cards (coords set in scripts/glow.ts) */
+[data-glow] { position: relative; }
+[data-glow]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0, 255, 135, 0.08),
+    rgba(0, 207, 255, 0.04) 35%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+[data-glow]:hover::after { opacity: 1; }
+
+/* Scroll progress bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 101;
+  background: linear-gradient(90deg, #00FF87, #00CFFF);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
 }
 
 /* Noise overlay */
@@ -110,8 +200,8 @@ body::before {
 
 /* Section wrapper */
 .section {
-  padding-top: clamp(5rem, 10vh, 8rem);
-  padding-bottom: clamp(5rem, 10vh, 8rem);
+  padding-top: clamp(6rem, 13vh, 10rem);
+  padding-bottom: clamp(6rem, 13vh, 10rem);
   padding-inline: clamp(1.25rem, 5vw, 6rem);
   max-width: 1200px;
   margin-inline: auto;
@@ -139,6 +229,17 @@ body::before {
   flex-shrink: 0;
 }
 
+/* One-line intro under each section heading */
+.section-sub {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.92rem, 1.3vw, 1.02rem);
+  color: #8899AA;
+  line-height: 1.7;
+  max-width: 560px;
+  margin-top: -1.5rem;
+  margin-bottom: 3rem;
+}
+
 /* Typewriter cursor blink */
 .cursor-blink {
   display: inline-block;
@@ -156,4 +257,6 @@ body::before {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+  /* A 0.01ms infinite alternate loop would flicker, so the background just stays still */
+  #ambient span { animation: none !important; }
 }

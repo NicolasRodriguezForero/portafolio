@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nicolasrodriguez.dev/sitemap-index.xml
+Sitemap: https://nicolasrodriguez.online/sitemap-index.xml
