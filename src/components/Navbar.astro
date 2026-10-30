@@ -34,7 +34,7 @@ const navLinks = [
     </ul>
 
     <div class="nav-right">
-      <!-- Language dropdown — label shows the current language (set by scripts/i18n.ts) -->
+      <!-- Language dropdown: label shows the current language (set by scripts/i18n.ts) -->
       <div class="lang-select">
         <button
           class="lang-trigger"
@@ -92,11 +92,17 @@ const navLinks = [
     width: min(1120px, calc(100% - 2rem));
     z-index: 100;
     padding: 0 0.6rem 0 1.25rem;
+    /* Transparent at the top of the page; the pill background appears once scrolled */
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  #navbar.scrolled {
     background: rgba(13, 21, 32, 0.6);
     backdrop-filter: blur(16px) saturate(140%);
     -webkit-backdrop-filter: blur(16px) saturate(140%);
-    border: 1px solid #1A2535;
-    border-radius: 100px;
+    border-color: #1A2535;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
@@ -304,6 +310,12 @@ const navLinks = [
 </style>
 
 <script>
+  // Show the navbar background only after leaving the top of the page
+  const navbar = document.getElementById('navbar');
+  const updateNavbarBg = () => navbar?.classList.toggle('scrolled', window.scrollY > 24);
+  window.addEventListener('scroll', updateNavbarBg, { passive: true });
+  updateNavbarBg();
+
   const toggleBtn = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = mobileMenu?.querySelectorAll('.mobile-link');

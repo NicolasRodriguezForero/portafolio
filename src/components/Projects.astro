@@ -11,7 +11,7 @@ const EXTERNAL_PATH = 'M7 17 17 7M8 7h9v9';
 
 <section id="projects">
   <div class="section">
-    <p class="section-label" data-i18n="projects.label">03 — PROYECTOS</p>
+    <p class="section-label" data-i18n="projects.label">03 · PROYECTOS</p>
     <h2 class="section-heading" data-reveal data-i18n-html="projects.heading">
       Lo que he<br />
       <span class="gradient-text">construido.</span>
@@ -63,7 +63,7 @@ const EXTERNAL_PATH = 'M7 17 17 7M8 7h9v9';
             )}
             <div class="tags">
               {project.tags.map((tag) => (
-                <span class={`tag ${project.accentColor}`}>{tag}</span>
+                <span class={`tag ${project.accentColor}`} data-i18n={`tag.${tag}`}>{tag}</span>
               ))}
             </div>
           </div>
@@ -81,17 +81,17 @@ const EXTERNAL_PATH = 'M7 17 17 7M8 7h9v9';
               <p class="other-desc" data-i18n={`project.${project.id}.description`}>{project.description}</p>
               <div class="tags">
                 {project.tags.map((tag) => (
-                  <span class="tag plain">{tag}</span>
+                  <span class="tag plain" data-i18n={`tag.${tag}`}>{tag}</span>
                 ))}
               </div>
               <div class="other-links">
                 {project.githubUrl && (
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`GitHub — ${project.title}`} class="icon-link">
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`GitHub: ${project.title}`} class="icon-link">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={GITHUB_PATH} /></svg>
                   </a>
                 )}
                 {project.demoUrl && (
-                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Demo — ${project.title}`} class="icon-link">
+                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Demo: ${project.title}`} class="icon-link">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d={EXTERNAL_PATH} /></svg>
                   </a>
                 )}

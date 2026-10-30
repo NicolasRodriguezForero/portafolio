@@ -138,5 +138,5 @@ export function initI18n(): void {
   setupLangSelect();
 }
 
-// Public API — usable from inline scripts or other modules
+// Public API - usable from inline scripts or other modules
 (window as Record<string, unknown>).setLang = selectLang;

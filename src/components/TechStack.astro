@@ -14,7 +14,7 @@ const cellMeta = [
 
 <section id="stack">
   <div class="section">
-    <p class="section-label" data-i18n="stack.label">04 — STACK</p>
+    <p class="section-label" data-i18n="stack.label">04 · STACK</p>
 
     <h2 class="section-heading" data-reveal data-i18n-html="stack.heading">
       Herramientas que<br />
@@ -38,7 +38,7 @@ const cellMeta = [
               {category.items.map((item) => (
                 <div class={`tech-pill ${item.level}`} title={item.name}>
                   <Icon name={item.icon} class:list={['tech-icon', { invert: item.invert }]} aria-hidden="true" />
-                  <span>{item.name}</span>
+                  <span data-i18n={`tag.${item.name}`}>{item.name}</span>
                 </div>
               ))}
             </div>

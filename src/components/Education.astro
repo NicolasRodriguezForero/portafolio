@@ -5,13 +5,13 @@ const education = [
   {
     id: 'pregrado',
     institution: 'Universidad Sergio Arboleda',
-    degree: 'Ingeniería en Ciencias de la Computación e Inteligencia Artificial',
-    period: 'Feb 2022 — Sep 2026',
+    degree: 'Ingeniero en Ciencias de la Computación e Inteligencia Artificial',
+    period: 'Feb 2022 - Sep 2026',
     location: 'Bogotá, Colombia',
-    type: 'Pregrado · Cum Laude',
+    type: 'Graduado · Cum Laude',
     highlights: [
       'Graduado Cum Laude (septiembre de 2026)',
-      'Programa de Honores "Rodrigo Noguera Laborde" — 2025-I, 2025-II y 2026-I',
+      'Programa de Honores "Rodrigo Noguera Laborde": 2025-I, 2025-II y 2026-I',
       'Proyecto de grado: OrbitEngine, plataforma SaaS multi-tenant para PyMEs',
     ],
     color: 'green' as const,
@@ -21,7 +21,7 @@ const education = [
     id: 'diplomado',
     institution: 'Escuela de Negocios PRIME · Universidad Sergio Arboleda',
     degree: 'Diplomado en Analítica de Datos y Big Data',
-    period: 'Abr — Jun 2026',
+    period: 'Abr - Jun 2026',
     location: 'Bogotá, Colombia',
     type: 'Diplomado ejecutivo · 120 h',
     highlights: [
@@ -53,7 +53,7 @@ const awards = [
   },
   {
     id: 'datafest',
-    title: 'Ponente — Data Fest 2026',
+    title: 'Ponente en Data Fest 2026',
     meta: 'Universidad Sergio Arboleda · May 2026',
     desc: 'ATLAS: sistema agéntico de orientación normativa y jurisprudencial sobre playas en Colombia',
     icon: 'lucide:mic',
@@ -61,8 +61,8 @@ const awards = [
   },
   {
     id: 'awsclub',
-    title: 'AWS Cloud Club — Core Team',
-    meta: 'Universidad Sergio Arboleda · Ene 2026 — Presente',
+    title: 'AWS Cloud Club · Core Team',
+    meta: 'Universidad Sergio Arboleda · Ene 2026 - Presente',
     desc: 'Apoyo en eventos de la comunidad y mentoría a estudiantes que empiezan en cloud computing',
     icon: 'lucide:cloud',
     color: 'cyan' as const,
@@ -91,7 +91,7 @@ const certifications = [
   {
     id: 'datacamp',
     title: 'Machine Learning & Deep Learning',
-    meta: 'DataCamp · 2025 — 2026',
+    meta: 'DataCamp · 2025 - 2026',
     desc: 'Deep Learning con Keras (intro y avanzado), preprocesamiento para ML y analítica predictiva en Python',
     icon: 'lucide:brain-circuit',
     color: 'green' as const,
@@ -102,7 +102,7 @@ const certifications = [
 
 <section id="education">
   <div class="section">
-    <p class="section-label" data-i18n="edu.label">06 — EDUCACIÓN</p>
+    <p class="section-label" data-i18n="edu.label">06 · EDUCACIÓN</p>
 
     <h2 class="section-heading" data-reveal data-i18n-html="edu.heading">
       Donde aprendí a<br />
@@ -123,7 +123,7 @@ const certifications = [
           <div class="edu-content">
             <span class={`edu-badge ${item.color}`} data-i18n={`edu.${item.id}.type`}>{item.type}</span>
             <h3 class="edu-degree" data-i18n={`edu.${item.id}.degree`}>{item.degree}</h3>
-            <p class="edu-institution">{item.institution} · {item.location}</p>
+            <p class="edu-institution" data-i18n={`edu.${item.id}.institution`}>{item.institution} · {item.location}</p>
             <ul class="edu-highlights">
               {item.highlights.map((h, hi) => (
                 <li>

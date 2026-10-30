@@ -1,4 +1,4 @@
-const GLOW_SELECTOR = ['.timeline-card', '.bento-cell', '.contact-card', '.stat'].join(',');
+const GLOW_SELECTOR = ['.bento-cell', '.contact-card', '.stat'].join(',');
 
 // Marks cards with [data-glow] and feeds the cursor position to the CSS spotlight
 export function initCardGlow(): void {

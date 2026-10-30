@@ -4,10 +4,10 @@ import type { Project } from '../types/index';
 export const projects: Project[] = [
   {
     id: 'atlas',
-    title: 'ATLAS — Agente de IA de jurisprudencia costera',
+    title: 'ATLAS: Agente de IA de jurisprudencia costera',
     description: 'Sistema agéntico RAG en producción para la orientación normativa y jurisprudencial sobre playas y zonas costeras en Colombia.',
     longDescription: 'Proyecto de investigación en la Universidad Sergio Arboleda, desarrollado con Daniel Velasco González.',
-    period: 'Mar — Jun 2026',
+    period: 'Mar - Jun 2026',
     role: 'Ingeniero de IA · Universidad Sergio Arboleda',
     highlights: [
       'Pipeline de ingesta de ~60 PDFs jurídicos con Docling, ChromaDB y embeddings con Ollama',
@@ -24,10 +24,10 @@ export const projects: Project[] = [
   },
   {
     id: 'priceit',
-    title: 'PriceIt — Motor de matching de productos',
+    title: 'PriceIt: Motor de matching de productos',
     description: 'Backend de una app comparadora de precios en producción (iOS/Android): emparejamiento de productos para 8 cadenas de retail (≈128 mil ofertas).',
     longDescription: 'Proyecto profesional en Indetech Consulting.',
-    period: 'Jul 2026 — Presente',
+    period: 'Jul 2026 - Presente',
     role: 'Desarrollador Backend · Indetech Consulting',
     highlights: [
       'API asíncrona en FastAPI con MongoDB/Azure Cosmos DB',
@@ -36,17 +36,17 @@ export const projects: Project[] = [
     ],
     tags: ['FastAPI', 'MongoDB', 'Cosmos DB', 'Azure', 'Hybrid Search'],
     githubUrl: null,
-    demoUrl: null,
+    demoUrl: 'https://priceit.com.co/',
     status: 'active',
     featured: true,
     accentColor: 'cyan',
   },
   {
     id: 'orbitengine',
-    title: 'OrbitEngine — SaaS multi-tenant',
+    title: 'OrbitEngine: SaaS multi-tenant',
     description: 'Plataforma SaaS para PyMEs desplegada en producción, con hasta 7 empresas activas.',
     longDescription: 'Desarrollado con Daniel Velasco González. Proyecto de grado.',
-    period: 'Nov 2025 — Abr 2026',
+    period: 'Nov 2025 - Abr 2026',
     role: 'Líder técnico · Full Stack',
     highlights: [
       'Inventario, clientes y ventas, alertas en tiempo real y dashboards',
@@ -85,7 +85,7 @@ export const projects: Project[] = [
   },
   {
     id: 'raison',
-    title: "Raison d'être — Investigación",
+    title: "Raison d'être: Investigación",
     description: 'Investigación sobre el propósito existencial en universitarios de 18 a 23 años (Frankl, Nietzsche, Camus, Sartre, Byung-Chul Han), con talleres y una instalación artística participativa.',
     longDescription: 'Componentes prácticos: Brújulas (ciclo de talleres) y Cartas al Fuego (instalación artística).',
     tags: ['Investigación', 'Humanidades', 'Talleres'],
